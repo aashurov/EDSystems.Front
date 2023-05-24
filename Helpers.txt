@@ -1,2 +1,2 @@
 sudo chmod u+x git.sh
- ./git.sh
+./git.sh
