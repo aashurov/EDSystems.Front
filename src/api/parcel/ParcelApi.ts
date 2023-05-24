@@ -5,7 +5,14 @@ import { GetAllParcel, GetAllRole } from "./ParcelDto";
 export class ParcelApi extends ApiContext{
     
     public getAllParcel({pageNumber, pageSize, code}:GetAllParcel):Promise<any>{
-        return this.get(`/Parcel/GetParcelListWithPaginationByCode?pageNumber=${pageNumber}&pageSize=${pageSize}&Code=${code}`)
+        if(code=='')
+        {
+            return this.get(`/Parcel/GetParcelListWithPaginationByCode?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+        }
+        else {
+            return this.get(`/Parcel/GetParcelListWithPaginationByCode?pageNumber=${pageNumber}&pageSize=${pageSize}&Code=${code}`)
+        }
+
     }
 
     public getParcelById({id}:IdProps):Promise<any>{

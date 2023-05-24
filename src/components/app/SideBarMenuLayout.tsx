@@ -38,7 +38,7 @@ export default function SideBarMenuLayout({children}:SideBarMenuLayoutProps){
     const submit = useCallback((value: any)=>{
         if(value.parcelCode.length === 9){
             const code = initialValues.parcelCode;
-            request.get(`/Parcel/Code?Code=${code}`)
+            request.get(`/Parcel/GetParcelDetailsByCode/${code}`)
             .then((response: any)=>{
                 const ID = response.data.id;
                 setInitialValues((prev: any)=>update(prev, {
@@ -75,7 +75,7 @@ export default function SideBarMenuLayout({children}:SideBarMenuLayoutProps){
                                 <div className="col-12">
                                     <InputField
                                         name="parcelCode"
-                                        placeholder="Search Parcel By Code..."
+                                        placeholder="Поиск..."
                                         value={initialValues.parcelCode}
                                         onChange={(value: any)=>onChangeParcelCode(value)}
                                         />

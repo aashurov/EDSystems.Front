@@ -13,7 +13,7 @@ export default function ParcelViewWrapper(){
 
     useEffect(()=>{
         if(Boolean(ID)){
-            request.get(`/Parcel/${ID}`).then((response: any)=>{
+            request.get(`/Parcel/GetParcelDetailsById/${ID}`).then((response: any)=>{
                 // console.log(response.data)
                 setData(response.data);
             }).catch((error: any)=>{
