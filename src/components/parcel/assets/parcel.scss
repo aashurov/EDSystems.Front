@@ -1,0 +1,29 @@
+.custom-parcel-image{
+    cursor: pointer;
+    position: relative;
+    transition: all ease .5s;
+}
+
+.custom-delete-button{
+    border: none;
+    display: none;
+    background-color: transparent;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    border-radius: 4px;
+    padding: 4px 8px;
+    &:hover{
+        background-color: red;
+    }
+}
+
+.custom-parcel-image:hover{
+    border: 1px solid black;
+
+    .custom-delete-button{
+        display: block;
+    }
+}
+
+

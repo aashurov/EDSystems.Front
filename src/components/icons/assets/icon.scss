@@ -1,0 +1,9 @@
+.active-item-closed{
+    transform: rotateZ(0deg);
+    transition: all ease .5s;
+}
+
+.active-item-opened{
+    transform: rotateZ(90deg);
+    transition: all ease .5s;
+}

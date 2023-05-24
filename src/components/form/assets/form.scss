@@ -1,0 +1,51 @@
+.show-error{
+    border: 1px solid red;
+    border-radius: 4px;
+}
+
+.input-container{
+    label{
+        width: 100%;
+    }
+    input{
+        width: 100%;
+        outline: none;
+        height: 36px;
+        padding: 0 10px;
+        border: 1px solid #c6ccd8;
+        border-radius: 4px;
+    }
+    .show-error{
+        border: 1px solid red;
+    }
+    .req-title{
+        font-size: 12px;
+        font-weight: bold;
+    }
+}
+
+.textarea-container{
+    label{
+        width: 100%;
+    }
+    textarea{
+        width: 100%;
+        outline: none;
+        height: 72px;
+        padding: 0 10px;
+        border: 1px solid #c6ccd8;
+        border-radius: 4px;
+        resize: none;
+    }
+    .show-error{
+        border: 1px solid red;
+    }
+    .req-title{
+        font-size: 12px;
+        font-weight: bold;
+    }
+}
+
+.select-container{
+    box-sizing: border-box;
+}

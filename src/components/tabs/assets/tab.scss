@@ -1,0 +1,31 @@
+.app-tab-page{
+    width: 100%;
+    height: 100%;
+
+    .header-component, 
+    .footer-component{
+        width: 100%;
+        height: 6vh;
+    }   
+
+    .app-tab-page-children{
+        width: 100%;
+        height: 76vh !important;
+        max-height: 90vh !important;
+        min-height: 76vh !important;
+        overflow: hidden;
+        overflow-y: scroll;
+        background-color: white;
+        box-sizing: border-box;
+        border-radius: 2px;
+    }
+
+    .height-90{
+        height: 82vh !important;
+    };
+
+    .height-100{
+        height: 100% !important;
+    }
+    
+}

@@ -1,0 +1,19 @@
+.group-box-container{
+    width: 100%;
+    border: 2px solid #c6ccd8;
+    border-radius: 4px;
+    padding-bottom: 6px;
+    position: relative;
+    .group-box-title{
+        display: inline;
+        background-color: white;
+        position: absolute;
+        top: -16px;
+        left: 16px;
+        font-size: 20px;
+        font-weight: 700;
+    }
+    .group-box-children{
+        padding: 14px;
+    }
+}

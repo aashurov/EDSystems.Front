@@ -1,0 +1,22 @@
+.app-button{
+    border: none;
+    background-color: transparent;
+    outline: none;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all ease 1s;
+    background-color: #2e5c87;
+}
+
+.hover:hover{
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1));
+}
+.bg-gold{
+    background-color: gold;
+}
+
+.bg-green{
+    background-color: green
+}
