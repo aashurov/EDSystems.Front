@@ -5,6 +5,13 @@ import { useUserApiContext } from "../../api/user/UserApiContext";
 import { request } from "../../api/request";
 import EditParcelStatusSecondForm from "./EditParcelStatusSecondForm";
 
+const defaultValues = {
+    parcelCode: [],
+    searchText: "",
+    radioButtonValue: "",
+    recipientCourierId: ""
+}
+
 export default function EditParcelStatusSecondFormWrapper(){
 
     const [statuses, setStatuses] = useState<any[]>([]);
@@ -75,6 +82,7 @@ export default function EditParcelStatusSecondFormWrapper(){
                 
                     document.body.removeChild(link);
                     URL.revokeObjectURL(href);
+                    setInitialValues(defaultValues)
                 })
                 .catch((error: any)=>console.log(error))
         }else if(value.radioButtonValue === "getCourierList"){
@@ -97,10 +105,11 @@ export default function EditParcelStatusSecondFormWrapper(){
             
                 document.body.removeChild(link);
                 URL.revokeObjectURL(href);
+                setInitialValues(defaultValues)
             })
             .catch((error: any)=>console.log(error))
         }
-    },[request])
+    },[request, setInitialValues, defaultValues])
 
     return (
         <TabPage
