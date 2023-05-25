@@ -7,6 +7,16 @@ import { request } from "../../api/request";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
+const defaultValues ={
+    parcelCode: [],
+    searchText: "",
+    sendSmsToRecipient: false, 
+    sendSmsToSender: false, 
+    sendSmsToTelegram: false, 
+    statusId: "",
+    recipientCourierId: ""
+}
+
 export default function EditParcelStatusFormWrapper(){
 
     const [statuses, setStatuses] = useState<any[]>([]);
@@ -14,6 +24,7 @@ export default function EditParcelStatusFormWrapper(){
     const navigate = useNavigate();
 
     const [initialValues, setInitialValues] = useState({
+        parcelCode: [],
         searchText: "",
         sendSmsToRecipient: false, 
         sendSmsToSender: false, 
@@ -51,10 +62,15 @@ export default function EditParcelStatusFormWrapper(){
 
     const sendStatus = useCallback((value: any)=>{
         
+        const array:any = [];
+        value.parcelCode && value.parcelCode.map((code: any)=>{
+            array.push(Number(code.title));
+        })
+
         const data = {
             statusId: value.statusId.value,
             recipientCourierId: value.recipientCourierId.value,
-
+            parcelCode: array,
             sendSmsToRecipient: value.sendSmsToRecipient, 
             sendSmsToSender: value.sendSmsToSender, 
             sendSmsToTelegram: value.sendSmsToTelegram,
@@ -62,11 +78,12 @@ export default function EditParcelStatusFormWrapper(){
         request.post(`/Parcel/UpdateParcelsStatusByCode`, 
         data
         ).then((response: any)=>{
-            toast.success(response.message)
             navigate('/app/parcels')
+            toast.success(response.message);
+            setInitialValues(defaultValues)
         })
         .catch((error: any)=>console.log(error))
-    },[request])
+    },[request, defaultValues, setInitialValues])
 
     return (
         <TabPage
