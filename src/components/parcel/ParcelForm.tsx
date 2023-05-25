@@ -414,21 +414,23 @@ export default function AddParcelForm({
                             <GroupBox title="Отправитель">
                                 <div className="row mt-2">
                                     <div className="col-12">
+                                        <label htmlFor="senderId">ФИО отправителя</label>
                                     <SelectPickerField
                                             name="senderId" 
                                             options={senders} 
                                             onChanges={(value)=>onChangeSenderId(value)}
-                                            label="ФИО отправителя"
+                                             id="senderId"
                                             isSearchable
                                             onInputChange={(value)=>searchSender(value)}
                                             />
                                         </div>
                                     <div className="col-12 mt-2">
+                                    <label htmlFor="parcelBranchFromId">Откуда</label>
                                         <SelectPickerField 
                                             name="parcelBranchFromId" 
                                             options={branchs} 
                                             onChanges={(value: any)=>onChangeParcelBranchFromId(value)} 
-                                            label="Откуда"/>
+                                            label=""/>
                                     </div>
                                  </div>
                              </GroupBox>
@@ -496,7 +498,7 @@ export default function AddParcelForm({
                                                 disabled 
                                                 inputClassName="border-0" 
                                                 value={"Стоимость перевозки оплачен?"} 
-                                                name="costDeliveryToBranch"/>
+                                                name="costDeliveryToBranchCheck"/>
 
                                             <CheckBox 
                                                 onChange={(event)=>onChangeStateDeliveryToBranch(event)} 
@@ -516,7 +518,7 @@ export default function AddParcelForm({
                                                 disabled 
                                                 inputClassName="border-0" 
                                                 value={"Стоимость доставки оплачен?"} 
-                                                name="costDeliveryToBranch"/>
+                                                name="costDeliveryToPointCheck"/>
                                             <CheckBox 
                                                 onChange={(event)=>onChangeStateDeliveryToPoint(event)} 
                                                 value={initialValues.StateDeliveryToPoint} 
@@ -535,7 +537,7 @@ export default function AddParcelForm({
                                                 disabled 
                                                 inputClassName="border-0" 
                                                 value={"С курьером рассчитан?"} 
-                                                name="costDeliveryToBranch"/>
+                                                name="someName"/>
                                             <CheckBox 
                                                 onChange={(event)=>onChangeStatePickingUp(event)} 
                                                 value={initialValues.StatePickingUp} 
@@ -570,7 +572,7 @@ export default function AddParcelForm({
                                                 disabled 
                                                 inputClassName="border-0" 
                                                 value={"С курьером рассчитан?"} 
-                                                name="costDeliveryToBranch"/>
+                                                name="someName100"/>
                                             <CheckBox 
                                                 onChange={(value: boolean)=>onChangeStateSenderCourierId(value)}
                                                 value={initialValues.StateSenderCourierId}
@@ -588,7 +590,7 @@ export default function AddParcelForm({
                                                 disabled 
                                                 inputClassName="border-0" 
                                                 value={"С курьером рассчитан?"} 
-                                                name="costDeliveryToBranch"/>
+                                                name="SomaNema213"/>
                                             <CheckBox 
                                                 onChange={()=>console.log("Asadbek")} 
                                                 name="Asadbek"/>

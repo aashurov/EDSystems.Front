@@ -88,7 +88,7 @@ export default function AddParcelFormWrapper(){
     },[request, setCostInfoList, setBranches, setPlans]) 
     
     useEffect(()=>{
-        request.get(`/UserManager/GetAll?RoleId=4`,{
+        request.get(`/UserManager/GetUserList?RoleId=4`,{
           headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`} 
         }).then((respon: any)=>{
             respon.data.customers.map((item: any)=>{
@@ -103,7 +103,7 @@ export default function AddParcelFormWrapper(){
     },[request, toast, setCouriers])
 
     useEffect(()=>{
-        request.get(`/PaymentMethod`,{
+        request.get(`/PaymentMethod/GetPaymentMethodList`,{
           headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`} 
         }).then((respon: any)=>{
             respon.data.paymentMethods.map((item: any)=>{

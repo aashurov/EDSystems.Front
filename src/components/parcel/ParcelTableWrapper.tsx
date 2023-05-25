@@ -63,9 +63,13 @@ export default function ParcelTableWrapper({
   const onSubmit = useCallback((value: any)=>{
         if(value.code.length === 9){
             ParcelApi.getAllParcel({pageNumber: pageCount, pageSize: pageSize, code: value.code}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
-        }else {
+        }else if(value.code.length === 0) {
+            ParcelApi.getAllParcel({pageNumber: pageCount, pageSize: pageSize, code: value.code}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
+        }
+        else  {
             toast.warning("Parcel Code Must Be 9 simble")
         }
+
 },[ParcelApi])
 
     return ( 
@@ -83,7 +87,7 @@ export default function ParcelTableWrapper({
                             <InputField
                             width={300}
                             name="code"
-                            placeholder="Search by code..."
+                            placeholder="Поиск..."
                             value={initialValues.code}
                             onChange={(value: any)=>onChangeCode(value)}
                             />
