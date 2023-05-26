@@ -43,6 +43,7 @@ interface AddParcelFormProps{
     readonly senders: any[];
     readonly recipients: any[];
     readonly plans: any[];
+    readonly statuses: any[];
     readonly customers: any[];
     readonly branchs: any[];
     readonly costInfo: any[];
@@ -60,6 +61,7 @@ export default function AddParcelForm({
     costInfo, 
     branchs, 
     plans, 
+    statuses, 
     customers, 
     paymentMethods, 
     setInitialValues,
@@ -189,6 +191,22 @@ export default function AddParcelForm({
             })
         )
     },[setInitialValues])
+    
+
+    const onChangeParcelStatusId = useCallback((value: any)=>{
+        setInitialValues((prev: any)=>
+            update(prev, {
+                parcelStatusId: {
+                    label: value.label,
+                    value: value.value
+                }
+            })
+        )
+    },[setInitialValues])
+
+
+
+
 
     const onChangeParcelPlanId = useCallback((value: any)=>{
 
@@ -215,7 +233,7 @@ export default function AddParcelForm({
             toast.warn(found.message)
         }
         else{
-            toast.error("Bunday jarayon bizda yo'q!")
+            toast.error("Такое направление не существует!")
         }
         
         setInitialValues((prev: any)=>
@@ -459,11 +477,13 @@ export default function AddParcelForm({
                                 </div>
                              </GroupBox>
                         </div>
+
+                        {/* {Boolean(parcelId)?(This will be Update ):(This will be create)} */}
                         
                         <div className="col-12 mt-4">
                             <GroupBox>
                                 <div className="row">
-                                    <div className="col-4">
+                                    <div className="col-3">
                                         <InputField 
                                             name="weight" 
                                             value={initialValues.weight} 
@@ -471,19 +491,26 @@ export default function AddParcelForm({
                                             type="number" 
                                             label="Вес"/>
                                     </div>
-                                    <div className="col-4">
+                                    <div className="col-3">
                                         <InputField 
                                             name="numberOfPoint" 
                                             value={initialValues.numberOfPoint} 
                                             onChange={(event: any)=>onChangeNumberOfPoint(event.target.value)} 
                                             type="number" label="Количество мест в посылке"/>
                                     </div>
-                                    <div className="col-4">
+                                    <div className="col-3">
                                         <SelectPickerField 
                                             name="parcelPlanId" 
                                             onChanges={(value: any)=>onChangeParcelPlanId(value)}  
                                             options={plans} 
                                             label="Тариф"/>
+                                    </div>
+                                    <div className="col-3">
+                                        <SelectPickerField 
+                                            name="parcelStatusId" 
+                                            onChanges={(value: any)=>onChangeParcelStatusId(value)}  
+                                            options={statuses} 
+                                            label="Статус"/>
                                     </div>
                                 </div>
                             </GroupBox>

@@ -4,6 +4,7 @@ import EditIcon from "../icons/EditIcon";
 import Table from "../table/Table";
 import { DateFormatter } from "../../utils/DateFormatter";
 import EyeIcon from "../icons/EyeIcon";
+import { Console } from "console";
 
 interface BranchTableProps{
     readonly data: any;
@@ -40,6 +41,18 @@ export default function ParcelTable({
                             </>
                         )
             },
+        },
+        {
+            header: 'Направление',
+            access: 'sender',
+            width: 130,
+            ceil: (row: any)=>{
+                return (
+                            <>
+                            {row.fromBranch.name} - {row.toBranch.name}
+                            </>
+                        )
+            },   
         },
         {
             header: 'Вес',
@@ -88,7 +101,6 @@ export default function ParcelTable({
                     {item.status.name}
                     </div>
                    }
-                   
                  })
              }
         },

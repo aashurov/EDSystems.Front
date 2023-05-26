@@ -5,17 +5,48 @@ import AddParcelForm from "./ParcelForm";
 import { useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import TabPage from "../tabs/TabPage";
-import axios from "axios";
+
+const labeValue: SelectType = {
+    label: "",
+    value: ""
+}
+
+const defaultValues = {
+    code: 0,
+        senderId: labeValue,
+        recipientId: labeValue,
+        parcelBranchFromId: labeValue,
+        parcelBranchToId: labeValue,
+        weight: 0,
+        images: [],
+        description: "",
+        pickupAddress: "",
+        deliveryAddress: "",
+        numberOfPoint: 0,
+        parcelPlanId: labeValue,
+        parcelStatusId: labeValue,
+        costDeliveryToBranch: 0,
+        costDeliveryToPoint: 0,
+        costPickingUp: 0,
+        paymentMethod: labeValue,
+        senderCourierId: labeValue,
+        recipientCourierId: labeValue   ,
+        StateDeliveryToBranch: false,
+        StatePickingUp: false,
+        StateDeliveryToPoint: false,
+        StateSenderCourierId: false,
+        StateRecipientCourierId: false,
+        sendSmsToRecipient: false,
+        sendSmsToSender: false,
+        sendSmsToTelegram: false,
+}
 
 interface SelectType{
     readonly label: string;
     readonly value: string;
 }
 
-const labeValue: SelectType = {
-    label: "",
-    value: ""
-}
+
 
 export default function AddParcelFormWrapper(){
     
@@ -32,6 +63,7 @@ export default function AddParcelFormWrapper(){
         deliveryAddress: "",
         numberOfPoint: 0,
         parcelPlanId: labeValue,
+        parcelStatusId: labeValue,
         costDeliveryToBranch: 0,
         costDeliveryToPoint: 0,
         costPickingUp: 0,
@@ -54,6 +86,7 @@ export default function AddParcelFormWrapper(){
     const [plans, setPlans] = useState<any>([]);
     const [couriers, setCouriers] = useState<any>([]);
     const [paymentMethods, setPaymentMethods] = useState<any[]>([]);
+    const [parcelStatuses, setParcelStatus] = useState<any[]>([]);
     const [search, setSearch] = useSearchParams();
     const navigator = useNavigate();
 
@@ -117,6 +150,22 @@ export default function AddParcelFormWrapper(){
         
     },[request, toast, setPaymentMethods]);
 
+    useEffect(()=>{
+        request.get(`/Status/GetStatusList`,{
+          headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`} 
+        }).then((respon: any)=>{
+            console.log(respon)
+            respon.data.statuses.map((item: any)=>{
+                const data = {
+                    label: item.name,
+                    value: item.id
+                }
+                setParcelStatus((prev: any)=>[...prev, data])
+            })
+        }).catch((error)=>toast.error(error.message))
+        
+    },[request, toast, setParcelStatus]);
+
 
     const getSendersBySearching = useCallback((value: string)=>{
         if(value != ""){
@@ -158,7 +207,8 @@ export default function AddParcelFormWrapper(){
 
     useEffect(()=>{
         if(parcelId !== ""){
-            request.get(`/Parcel/${parcelId}`).then((response)=>{
+            request.get(`/Parcel/GetParcelDetailsById/${parcelId}`).then((response)=>{
+                const parcelStatusInResponse = response.data.parcelStatus.filter((item: any)=>item.isCurrent)[0]; 
                 const value = response.data
                 const data: any = {
                     ...value,
@@ -190,6 +240,10 @@ export default function AddParcelFormWrapper(){
                         label: value.parcelPlan.name,
                         value: value.parcelPlan.id
                     },
+                    parcelStatusId: {
+                        label: parcelStatusInResponse.status.name,
+                        value: parcelStatusInResponse.status.id
+                    },
                     costDeliveryToBranch: value.parcelCost.costDeliveryToBranch,
                     costDeliveryToPoint: value.parcelCost.costDeliveryToPoint,
                     costPickingUp: value.parcelCost.costPickingUp,
@@ -210,9 +264,12 @@ export default function AddParcelFormWrapper(){
                 }
                  setInitialValues(data)
             }).catch((error)=>console.log(error))
+        }else if(!parcelId){
+            setInitialValues(defaultValues);
         }
-    },[request, parcelId, setInitialValues, paymentMethods])
+    },[request, parcelId, setInitialValues, paymentMethods, defaultValues])
 
+    console.log(initialValues)
 
     const onSumbit = useCallback((value: any)=>{
         if(parcelId !== ""){
@@ -253,7 +310,7 @@ export default function AddParcelFormWrapper(){
                 sendSmsToSender: value.sendSmsToSender,
                 sendSmsToTelegram: value.sendSmsToTelegram,
             }
-            request.put("/Parcel", data ,{
+            request.put("/Parcel/UpdateParcel", data ,{
                     headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`}
                 }).then(()=>{
                     toast.success("Посылка успешно обновлена!")
@@ -299,7 +356,7 @@ export default function AddParcelFormWrapper(){
                 sendSmsToSender: value.sendSmsToSender,
                 sendSmsToTelegram: value.sendSmsToTelegram,
             }
-            request.post("/Parcel", data ,{
+            request.post("/Parcel/Createparcel", data ,{
                     headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`}
                 }).then(()=>{
                     toast.success("Посылка успешно добавлена!")
@@ -359,6 +416,7 @@ export default function AddParcelFormWrapper(){
                 senders={senders}
                 recipients={receipents}
                 paymentMethods={paymentMethods} 
+                statuses={parcelStatuses}
                 customers={couriers} 
                 initialValues={initialValues} 
                 setInitialValues={setInitialValues} 
