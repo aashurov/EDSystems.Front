@@ -165,7 +165,7 @@ export default function SideBarMenu(){
                     <BookIcon color="white"/>
                 }
                 >
-                Накладние
+                Накладные
             </SideBarItem>
                 </AppMenu>
         )}
@@ -268,7 +268,7 @@ export default function SideBarMenu(){
                     <EditIcon color="white"/>
                 }
                 >
-                Накладние
+                Накладные
             </SideBarItem>
                 </AppMenu>
         )}
@@ -376,7 +376,7 @@ export default function SideBarMenu(){
                     <EditIcon color="white"/>
                 }
                 >
-                Накладние
+                Накладные
             </SideBarItem>
             </AppMenu>
         )}

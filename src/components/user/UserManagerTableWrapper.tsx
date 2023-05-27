@@ -8,12 +8,18 @@ import { useSearchParams } from "react-router-dom";
 import YesOrNoModal from "../app/YesOrNoModal";
 import UserManagerTable from "./UserManagerTable";
 import { useUserApiContext } from "../../api/user/UserApiContext";
+import { Form, Formik } from "formik";
+import InputField from "../form/InputField";
+import { object, string } from "yup";
+import { update } from "immupdate";
 
 interface UserManagerTableWrapperProps{
     readonly editRow: (value: any) => void;
     readonly roleId: number;
 }
-
+const validationSchema = object({
+    searchText: string()
+})
 export default function UserManagerTableWrapper({editRow, roleId}:UserManagerTableWrapperProps){
 
     const { UserApi } = useUserApiContext();
@@ -23,9 +29,13 @@ export default function UserManagerTableWrapper({editRow, roleId}:UserManagerTab
     const [searchParams, setSearchParams] = useSearchParams();
     const pageSize = Number(searchParams.get("pageSize") || 25);
     const pageCount = Number(searchParams.get("pageCount") || 1);
+   
+    const [initialValues, setInitialValues] = useState({
+        searchText: ""
+    })
 
   useEffect(()=>{
-    UserApi.getAllUsers({pageNumber: pageCount, pageSize: pageSize, roleId: roleId}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
+    UserApi.getAllUsersWithSearchText({pageNumber: pageCount, pageSize: pageSize, searchText: initialValues.searchText}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
   },[UserApi, toast, pageCount, pageSize, roleId])
 
   const deleteRow = useCallback((id: any)=>{
@@ -39,9 +49,49 @@ export default function UserManagerTableWrapper({editRow, roleId}:UserManagerTab
         setId(null);
   },[ setIsDelModal, setId])
 
+  const onChangeCode = useCallback((value: any)=>{
+    setInitialValues((prev: any)=>update(prev, {
+        searchText: value.target.value
+    }))
+},[setInitialValues])
+
+  const onSubmit = useCallback((value: any)=>{
+  
+    if(value.searchText.length > 0){
+        UserApi.getAllUsersWithSearchText({pageNumber: pageCount, pageSize: pageSize, searchText: value.searchText}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
+    }else if(value.code.length === 0) {
+        UserApi.getAllUsersWithSearchText({pageNumber: pageCount, pageSize: pageSize, searchText: value.searchText}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
+    }
+    else  {
+        toast.warning("Код не должен быть меньше 9 символов")
+    }
+
+},[UserApi])
+
     return (
         <TabPage
             childrenClassName="p-2"
+            headerComponent={
+                <div className="d-flex justify-content-end s">
+                    <Formik
+                    initialValues={initialValues}
+                    onSubmit={()=>onSubmit(initialValues)}
+                    validationSchema={validationSchema}
+                    >
+                    {()=>(
+                        <Form>
+                            <InputField
+                            width={300}
+                            name="searchText"
+                            placeholder="Поиск..."
+                            value={initialValues.searchText}
+                            onChange={(value: any)=>onChangeCode(value)}
+                            />
+                        </Form>
+                    )}
+                </Formik>
+                </div>
+            }
             footerComponent={
                 <div className="d-flex justify-content-end my-3">
                 <Pagination 

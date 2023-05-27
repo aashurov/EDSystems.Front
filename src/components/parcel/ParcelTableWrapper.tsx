@@ -67,7 +67,7 @@ export default function ParcelTableWrapper({
             ParcelApi.getAllParcel({pageNumber: pageCount, pageSize: pageSize, code: value.code}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
         }
         else  {
-            toast.warning("Parcel Code Must Be 9 simble")
+            toast.warning("Код не должен быть меньше 9 символов")
         }
 
 },[ParcelApi])
@@ -100,7 +100,7 @@ export default function ParcelTableWrapper({
                 <div className="d-flex justify-content-between my-3">
                 <Button className="bg-danger px-2 py-2" onClick={()=>{
                     if(ids.length === 0){
-                        toast.error("Please choose branch")
+                        toast.error("Пожалуйста выбирите филиал")
                     }else{
                         setIsDelModal(true)}}
                     }
