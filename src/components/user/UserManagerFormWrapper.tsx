@@ -49,9 +49,9 @@ export default function UserManagerFormWrapper({back}:UserManagerFormWrapperProp
         roleName: value.roleName.map((item: any)=>item.label)
         }
         UserApi.createUser(data).then(()=>{
-                toast.success("Added!")
+                toast.success("Добавлено!")
                 setSearchParams({pageType: "table"})
-            }).catch(()=>toast.error("Fail!"))
+            }).catch(()=>toast.error("Ошибка!"))
     },[UserApi, setSearchParams, toast])
 
     return (

@@ -7,20 +7,17 @@ export class UserApi extends ApiContext{
         return this.get(`/UserManager/GetUserListWithPagination?pageNumber=${pageNumber}&pageSize=${pageSize}&RoleId=${roleId}`)
     }
 
-    public getAllUsersWithSearchText({pageNumber, pageSize, searchText }:any):Promise<any>{
+    public getAllUsersWithSearchText({pageNumber, pageSize, roleId, searchText }:any):Promise<any>{
         
         if(searchText=='')
         {
-            return this.get(`/UserManager/GetUserListWithPaginationWithSearchText?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+            return this.get(`/UserManager/GetUserListWithPaginationWithSearchText?pageNumber=${pageNumber}&pageSize=${pageSize}&RoleId=${roleId}`)
         }
         else {
-            console.log(searchText)
-            return this.get(`/UserManager/GetUserListWithPaginationWithSearchText?pageNumber=${pageNumber}&pageSize=${pageSize}&searchText=${searchText}`)
+            //console.log(searchText)
+            return this.get(`/UserManager/GetUserListWithPaginationWithSearchText?pageNumber=${pageNumber}&pageSize=${pageSize}&RoleId=${roleId}&searchText=${searchText}`)
         }
     }
-
-   
-
 
     public getAllUsersWithoutPagination(roleId: number): Promise<any>{
         return this.get(`/UserManager/GetUserList?RoleId=${roleId}`)

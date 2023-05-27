@@ -35,7 +35,7 @@ export default function UserManagerTableWrapper({editRow, roleId}:UserManagerTab
     })
 
   useEffect(()=>{
-    UserApi.getAllUsersWithSearchText({pageNumber: pageCount, pageSize: pageSize, searchText: initialValues.searchText}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
+    UserApi.getAllUsersWithSearchText({pageNumber: pageCount, pageSize: pageSize, roleId: roleId,  searchText: initialValues.searchText}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
   },[UserApi, toast, pageCount, pageSize, roleId])
 
   const deleteRow = useCallback((id: any)=>{
@@ -58,9 +58,9 @@ export default function UserManagerTableWrapper({editRow, roleId}:UserManagerTab
   const onSubmit = useCallback((value: any)=>{
   
     if(value.searchText.length > 0){
-        UserApi.getAllUsersWithSearchText({pageNumber: pageCount, pageSize: pageSize, searchText: value.searchText}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
+        UserApi.getAllUsersWithSearchText({pageNumber: pageCount, pageSize: pageSize, roleId: roleId, searchText: value.searchText}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
     }else if(value.code.length === 0) {
-        UserApi.getAllUsersWithSearchText({pageNumber: pageCount, pageSize: pageSize, searchText: value.searchText}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
+        UserApi.getAllUsersWithSearchText({pageNumber: pageCount, pageSize: pageSize, roleId: roleId, searchText: value.searchText}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
     }
     else  {
         toast.warning("Код не должен быть меньше 9 символов")
