@@ -31,13 +31,25 @@ export default function ParcelTable({
             width: 100
         },
         {
-            header: 'Получатель',
+            header: 'Отправитель',
             access: 'sender',
             width: 400,
             ceil: (row: any)=>{
                 return (
                             <>
                             {row.sender.firstName} {row.sender.lastName}
+                            </>
+                        )
+            },
+        },
+        {
+            header: 'Получатель',
+            access: 'sender',
+            width: 400,
+            ceil: (row: any)=>{
+                return (
+                            <>
+                            {row.recipient.firstName} {row.recipient.lastName}
                             </>
                         )
             },
@@ -53,6 +65,18 @@ export default function ParcelTable({
                             </>
                         )
             },   
+        },
+        {
+            header: 'Тариф',
+            access: 'parcelPlan',
+            width: 50,
+            ceil: (row: any)=>{
+                return (
+                            <>
+                            {row.parcelPlan.name} 
+                            </>
+                        )
+            },
         },
         {
             header: 'Вес',

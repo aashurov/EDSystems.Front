@@ -41,7 +41,7 @@ export default function ImgUpload({setImage, className}:ImgUploadProps){
                 closeHandler={()=>console.log("value")}
                 >
                    <div className="d-flex justify-content-center align-items-center h-100">
-                        <h5>Images are uploading...</h5>
+                        <h5>Изображения загружаются...</h5>
                    </div>
             </Modal>
         </div>
