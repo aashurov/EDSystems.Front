@@ -17,7 +17,7 @@ export default function ParcelViewWrapper(){
                 // console.log(response.data)
                 setData(response.data);
             }).catch((error: any)=>{
-                console.log(error)
+                // console.log(error)
             })
         }
     },[ID, request, setData])    

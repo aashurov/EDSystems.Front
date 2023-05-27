@@ -145,6 +145,16 @@ export default function SideBarMenu(){
                                 >
                                 Все
                             </SideBarItem>     
+                            <SideBarItem
+                                key="by-couriers"
+                                >
+                                По курьерам
+                            </SideBarItem>  
+                            <SideBarItem
+                                key="by-customers"
+                                >
+                                По клиентам
+                            </SideBarItem> 
                         </AppMenu>
                     }
                     >
