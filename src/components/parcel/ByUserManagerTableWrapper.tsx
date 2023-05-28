@@ -1,78 +1,75 @@
 import React , {useState, useEffect, useCallback} from "react";
 import { toast } from "react-toastify";
+import { request } from "../../api/request";
 import Pagination from "../pagination/Pagination";
-import Button from "../button/Button";
-import DeleteIcon from "../icons/DeleteIcon";
 import TabPage from "../tabs/TabPage";
 import Modal from "../modal/Modal";
 import { useSearchParams } from "react-router-dom";
 import YesOrNoModal from "../app/YesOrNoModal";
-import ParcelTable from "./ParcelTable";
-import { useParcelApiContext } from "../../api/parcel/ParcelApiContext";
+import UserManagerTable from "./ByUserManagerTable";
+import { useUserApiContext } from "../../api/user/UserApiContext";
 import { Form, Formik } from "formik";
-import { object, string } from "yup";
 import InputField from "../form/InputField";
+import { object, string } from "yup";
 import { update } from "immupdate";
 
-interface BranchTableWrapperProps{
-    readonly selectRow: (value: any) => void;
-    readonly selectRowForView: (value: any) => void;
+interface UserManagerTableWrapperProps{
+    readonly editRow: (value: any) => void;
+
+    readonly roleId: number;
 }
-
 const validationSchema = object({
-    code: string()
+    searchText: string()
 })
+export default function UserManagerTableWrapper({editRow, roleId}:UserManagerTableWrapperProps){
 
-export default function ParcelTableWrapper({
-    selectRow,
-    selectRowForView
-}:BranchTableWrapperProps){
-
-    const { ParcelApi } = useParcelApiContext();
-    const [data, setData] = useState<any>({})
-    const [ids, setIds] = useState([])
+    const { UserApi } = useUserApiContext();
+    const [data, setData] = useState<any>({});
+    const [id, setId] = useState(null)
     const [isDelModal, setIsDelModal] = useState<boolean>(false);
     const [searchParams, setSearchParams] = useSearchParams();
     const pageSize = Number(searchParams.get("pageSize") || 25);
     const pageCount = Number(searchParams.get("pageCount") || 1);
+   
     const [initialValues, setInitialValues] = useState({
-        code: ""
+        searchText: ""
     })
 
   useEffect(()=>{
-     ParcelApi.getAllParcel({pageNumber: pageCount, pageSize: pageSize, code: initialValues.code}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
-  },[ParcelApi, toast, pageCount, pageSize])
+    UserApi.getAllUsersWithSearchText({pageNumber: pageCount, pageSize: pageSize, roleId: roleId,  searchText: initialValues.searchText}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
+  },[UserApi, toast, pageCount, pageSize, roleId])
 
-  const deletePost = useCallback(()=>{
-        const id = ids
-        ParcelApi.deleteParcel({id}).then(()=>{
-            toast.success("Deleted!");
+  const deleteRow = useCallback((id: any)=>{
+        UserApi.deleteUser(id).then(()=>{
+            toast.success("Удалено!");
             setIsDelModal(false);
             window.location.reload();
         }).catch(()=>{
-            toast.error("Faild!")
+            toast.error("Ошибка!")
         })
-  },[ids, setIsDelModal, ParcelApi])
+        setId(null);
+  },[ setIsDelModal, setId])
 
   const onChangeCode = useCallback((value: any)=>{
-        setInitialValues((prev: any)=>update(prev, {
-            code: value.target.value
-        }))
-  },[setInitialValues])
+    setInitialValues((prev: any)=>update(prev, {
+        searchText: value.target.value
+    }))
+},[setInitialValues])
 
   const onSubmit = useCallback((value: any)=>{
-        if(value.code.length === 9){
-            ParcelApi.getAllParcel({pageNumber: pageCount, pageSize: pageSize, code: value.code}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
-        }else if(value.code.length === 0) {
-            ParcelApi.getAllParcel({pageNumber: pageCount, pageSize: pageSize, code: value.code}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
-        }
-        else  {
-            toast.warning("Код не должен быть меньше 9 символов")
-        }
+  
+    if(value.searchText.length > 0){
+        UserApi.getAllUsersWithSearchText({pageNumber: pageCount, pageSize: pageSize, roleId: roleId, searchText: value.searchText}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
+    }else if(value.code.length === 0) {
+        UserApi.getAllUsersWithSearchText({pageNumber: pageCount, pageSize: pageSize, roleId: roleId, searchText: value.searchText}).then((respon: any)=>setData(respon.data)).catch((error)=>toast.error(error.message))
+    }
+    else  {
+        toast.warning("Код не должен быть меньше 9 символов")
+    }
 
-},[ParcelApi])
+},[UserApi])
 
-    return ( 
+    return (
         <TabPage
             childrenClassName="p-2"
             headerComponent={
@@ -86,9 +83,9 @@ export default function ParcelTableWrapper({
                         <Form>
                             <InputField
                             width={300}
-                            name="code"
+                            name="searchText"
                             placeholder="Поиск..."
-                            value={initialValues.code}
+                            value={initialValues.searchText}
                             onChange={(value: any)=>onChangeCode(value)}
                             />
                         </Form>
@@ -97,16 +94,7 @@ export default function ParcelTableWrapper({
                 </div>
             }
             footerComponent={
-                <div className="d-flex justify-content-between my-3">
-                <Button className="bg-danger px-2 py-2" onClick={()=>{
-                    if(ids.length === 0){
-                        toast.error("Пожалуйста выбирите филиал")
-                    }else{
-                        setIsDelModal(true)}}
-                    }
-                    >
-                    <DeleteIcon color="white" size={16}/>
-                </Button>
+                <div className="d-flex justify-content-end my-3">
                 <Pagination 
                     pageNumber={data.pageNumber} 
                     totalCount={data.totalCount} 
@@ -115,10 +103,15 @@ export default function ParcelTableWrapper({
                 </div>
             }
             >
-            <ParcelTable 
-                 selectRowCheckbox={setIds} 
-                 selectRow={selectRow}
-                 selectRowForView={selectRowForView} 
+            <UserManagerTable 
+                 editRow={editRow}
+                 deleteRow={(row: any)=>{
+                    setId(row.id)
+                    setIsDelModal(true)
+                 }}
+                 byCourier={(row: any)=>{
+                    setId(row.id)
+                 }}
                  data={data.items}/>
             <Modal
                 width="500px"
@@ -130,10 +123,11 @@ export default function ParcelTableWrapper({
                         titleText="Вы уверены, что хотите удалить?"
                         onClick={(value: boolean)=>{
                         if(value){
-                            deletePost();
+                            deleteRow(id);
                         }else{
                             setIsDelModal(false);
                         }
+                        setId(null);
                     }}/>
             </Modal>
         </TabPage>

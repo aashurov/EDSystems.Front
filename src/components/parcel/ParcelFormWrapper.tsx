@@ -269,7 +269,7 @@ export default function AddParcelFormWrapper(){
         }
     },[request, parcelId, setInitialValues, paymentMethods, defaultValues])
 
-    console.log(initialValues)
+    // console.log(initialValues)
 
     const onSumbit = useCallback((value: any)=>{
         if(parcelId !== ""){

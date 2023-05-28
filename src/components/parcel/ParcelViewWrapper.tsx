@@ -10,11 +10,9 @@ export default function ParcelViewWrapper(){
     const [data, setData] = useState({});
 
     const ID = useMemo(()=>search.get('parcelId') ? search.get('parcelId') : "", [search]);
-
     useEffect(()=>{
         if(Boolean(ID)){
             request.get(`/Parcel/GetParcelDetailsById/${ID}`).then((response: any)=>{
-                // console.log(response.data)
                 setData(response.data);
             }).catch((error: any)=>{
                 // console.log(error)
@@ -28,7 +26,9 @@ export default function ParcelViewWrapper(){
             >
             <ParcelView
                 data={data}
+               
                 />
+                
        </TabPage>
     )
 }

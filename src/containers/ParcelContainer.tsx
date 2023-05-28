@@ -3,6 +3,8 @@ import ContainerLayout from "../components/app/ContainerLayout";
 import AddParcelFormWrapper from "../components/parcel/ParcelFormWrapper";
 import ParcelTableWrapper from "../components/parcel/ParcelTableWrapper";
 import ParcelViewWrapper from "../components/parcel/ParcelViewWrapper";
+import ByCouriersTab from "../components/parcel/ByCouriersTab";
+import ByCustomersTab from "../components/parcel/ByCustomersTab";
 
 export default function ParcelContainer(){
     const { tab = "all-parcels" } = useParams();
@@ -26,6 +28,12 @@ export default function ParcelContainer(){
            {tab === "parcel-view" && (
             <ParcelViewWrapper/>
            )}
+           {tab === "by-couriers" && (
+            <ByCouriersTab/>
+          )}
+          {tab === "by-customers" && (
+            <ByCustomersTab/>
+          )}
         </ContainerLayout>
     )
 }

@@ -13,6 +13,7 @@ interface UserManagerTableProps{
 }
 
 export default function UserManagerTable({data, editRow, byCourier, deleteRow}:UserManagerTableProps){
+
     const headers:any = [
         {
             header: 'ID',
@@ -21,7 +22,7 @@ export default function UserManagerTable({data, editRow, byCourier, deleteRow}:U
         },
          {
             header: 'ФИО',
-            access: 'fullName',
+            access: 'fullName' ,
             width: 100
         },
         // {
@@ -43,48 +44,49 @@ export default function UserManagerTable({data, editRow, byCourier, deleteRow}:U
             header: 'Контакт',
             access: 'phone',
             width: 100
+
         },
-        {
-            header: 'Логин',
-            access: 'email',
-            width: 100
-        },
-        {
-            header: 'Роль',
-            access: 'userRoles',
-            width: 80,
-            ceil: (row: any) => {
-               return row.userRoles.map((item:any, index: number)=>{
-                   return <div className="text-success fw-bold rounded ps-2 py-1 mb-1">
-                   {item.role.name}
-                   </div>
-                })
-            }
-        },
+        // {
+        //     header: 'Логин',
+        //     access: 'email',
+        //     width: 100
+        // },
+        // {
+        //     header: 'Роль',
+        //     access: 'userRoles',
+        //     width: 80,
+        //     ceil: (row: any) => {
+        //        return row.userRoles.map((item:any, index: number)=>{
+        //            return <div className="text-success fw-bold rounded ps-2 py-1 mb-1">
+        //            {item.role.name}
+        //            </div>
+        //         })
+        //     }
+        // },
         {
             header: "...",
             access: 'edit',
             ceil: (row: any)=>{
                 return (
                             <div className="d-flex">
-                                {/* <TableButton
+                                <TableButton
                                 className="bg-success me-3"
                                 onClick={()=>byCourier(row)}
                                 >
                                 <EyeIcon color="white" size={14}/>
-                            </TableButton> */}
-                            <TableButton
+                            </TableButton>
+                            {/* <TableButton
                                 className="bg-warning me-3"
                                 onClick={()=>editRow(row)}
                                 >
                                 <EditIcon color="white" size={14}/>
-                            </TableButton>
-                            <TableButton
+                            </TableButton> */}
+                            {/* <TableButton
                                 className="bg-danger"
                                 onClick={()=>deleteRow(row)}
                                 >
                                 <DeleteIcon color="white" size={14}/>
-                            </TableButton>
+                            </TableButton> */}
                             </div>
                         )
             },
