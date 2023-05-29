@@ -6,7 +6,7 @@ import TabPage from "../tabs/TabPage";
 import Modal from "../modal/Modal";
 import { useSearchParams } from "react-router-dom";
 import YesOrNoModal from "../app/YesOrNoModal";
-import UserManagerTable from "./UserManagerTable";
+import UserManagerTable from "./ByUserManagerTable";
 import { useUserApiContext } from "../../api/user/UserApiContext";
 import { Form, Formik } from "formik";
 import InputField from "../form/InputField";
@@ -15,6 +15,7 @@ import { update } from "immupdate";
 
 interface UserManagerTableWrapperProps{
     readonly editRow: (value: any) => void;
+
     readonly roleId: number;
 }
 const validationSchema = object({
@@ -40,11 +41,11 @@ export default function UserManagerTableWrapper({editRow, roleId}:UserManagerTab
 
   const deleteRow = useCallback((id: any)=>{
         UserApi.deleteUser(id).then(()=>{
-            toast.success("Deleted!");
+            toast.success("Удалено!");
             setIsDelModal(false);
             window.location.reload();
         }).catch(()=>{
-            toast.error("Faild!")
+            toast.error("Ошибка!")
         })
         setId(null);
   },[ setIsDelModal, setId])
@@ -109,8 +110,7 @@ export default function UserManagerTableWrapper({editRow, roleId}:UserManagerTab
                     setIsDelModal(true)
                  }}
                  byCourier={(row: any)=>{
-                    setId(row.id)
-                    // setIsDelModal(true)
+                    setSearchParams({pageType: "curier-parcel-tab", courierId: row.id})
                  }}
                  data={data.items}/>
             <Modal

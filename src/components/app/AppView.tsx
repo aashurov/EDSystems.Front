@@ -1,4 +1,5 @@
 import "./assets/app-view.scss";
+import { DateFormatter } from "../../utils/DateFormatter";
 
 interface Props{
     readonly data: any;
@@ -21,10 +22,12 @@ export default function AppView({
                 <div className="row">
                     <div className="col-6 p-4">
                         {data?.parcelImage?.length > 0 && (
-                            <img src={data?.parcelImage[imageIndex]?.imageBytes} width="100%" alt="" />
+                            <img src={data?.parcelImage[imageIndex]?.imageBytes} width="50%" alt="" />
                         )}
                     </div>
                     <div className="col-6 p-4">
+                        {/* { <p><strong>Статус - </strong> { data.parcelStatus[0]?.status.name} </p> } */}
+                        {/* {<p><strong>Дата регистрации - </strong> {DateFormatter(data.dateCreated)}</p>} */}
                         <p><strong>Отправитель - </strong> { data.sender?.firstName} { data.sender?.lastName } { data.sender?.phoneNumber}</p>
                         <p><strong>Получатель - </strong> { data.recipient?.firstName} { data.recipient?.lastName } { data.recipient?.phoneNumber}</p>
                         <p><strong>Направление  - </strong> { data.fromBranch?.city} - { data.toBranch?.city }</p>
@@ -33,14 +36,16 @@ export default function AppView({
                         <p><strong>Вес посылки - </strong> { data.parcelSize?.weight} кг</p>
                         <p><strong>Количество мест - </strong> { data.parcelSize?.numberOfPoint}</p>
                         <p><strong>Тариф перевозки - </strong> { data.parcelPlan?.name}</p>
-                        <p><strong>Стоимость перевозки - </strong> { data.parcelCost?.costDeliveryToBranch}  $ { data.parcelCost?.stateDeliveryToBranch ? "Оплачена" : "Не Оплачена"} </p>
-                        <p><strong>Стоимость доставки - </strong> { data.parcelCost?.costDeliveryToPoint}  $ { data.parcelCost?.stateDeliveryToPoint ? "Оплачена" : "Не Оплачена"} </p>
-                        <p><strong>Стоимость забора - </strong> { data.parcelCost?.costPickingUp}  $ { data.parcelCost?.statePickingUp ? "Оплачена" : "Не Оплачена"} </p>
+                        <p><strong>Стоимость перевозки - </strong> { data.parcelCost?.costDeliveryToBranch}  $ { data.parcelCost?.stateDeliveryToBranch ? "Оплачено" : "Не Оплачено"} </p>
+                        <p><strong>Стоимость доставки - </strong> { data.parcelCost?.costDeliveryToPoint}  $ { data.parcelCost?.stateDeliveryToPoint ? "Оплачено" : "Не Оплачено"} </p>
+                        <p><strong>Стоимость забора - </strong> { data.parcelCost?.costPickingUp}  $ { data.parcelCost?.statePickingUp ? "Оплачено" : "Не Оплачено"} </p>
                         <p><strong>Итоговая стоимость услуги - </strong> { Number(data.parcelCost?.costDeliveryToBranch) + Number(data.parcelCost?.costDeliveryToPoint) + Number(data.parcelCost?.costPickingUp)} $</p> 
                         <p><strong>Метод оплаты - </strong> { data.parcelCost?.paymentMethod.name.toString() }</p>
+                        <p><strong>Курьер для забора - </strong> { data.senderCourier?.firstName} { data.senderCourier?.lastName } { data.senderCourier?.phoneNumber}</p>
+                        <p><strong>Курьер для доставки - </strong> { data.recipinetCourier?.firstName} { data.recipinetCourier?.lastName } { data.recipinetCourier?.phoneNumber}</p>
                         <p><strong>Оператор - </strong> { data.senderStaff?.firstName} { data.senderStaff?.lastName } { data.senderStaff?.phoneNumber}</p>
                     </div>
-                </div>
+                </div>  
         </div>
     )
 }

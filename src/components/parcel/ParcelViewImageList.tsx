@@ -27,7 +27,7 @@ export default function ParcelViewImageList({
                             setImage(index);
                         }}
                         >
-                        <img src={image.imageBytes} width="100%" alt="" />
+                        <img src={image.imageBytes} width="50%" alt="" />
                     </div>
                 )
             })}

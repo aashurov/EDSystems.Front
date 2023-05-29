@@ -145,6 +145,16 @@ export default function SideBarMenu(){
                                 >
                                 Все
                             </SideBarItem>     
+                            <SideBarItem
+                                key="by-couriers"
+                                >
+                                По курьерам
+                            </SideBarItem>  
+                            {/* <SideBarItem
+                                key="by-customers"
+                                >
+                                По клиентам
+                            </SideBarItem>  */}
                         </AppMenu>
                     }
                     >
@@ -263,7 +273,7 @@ export default function SideBarMenu(){
                     Статус посылок
                 </SideBarItem>
                 <SideBarItem
-                key="edit-parcel"
+                key="edit-parcel-second"
                 icon={
                     <EditIcon color="white"/>
                 }
@@ -354,14 +364,16 @@ export default function SideBarMenu(){
                 >
                 Посылки
             </SideBarItem>
-            <SideBarItem
+            
+            {/* <SideBarItem
                 key="add-parcel"
                 icon={
                     <AddIcon color="white"/>
                 }
                 >
                 Создать
-            </SideBarItem>
+            </SideBarItem> */}
+            
             <SideBarItem
                 key="edit-parcel"
                 icon={
@@ -370,8 +382,9 @@ export default function SideBarMenu(){
                 >
                 Статус посылок
             </SideBarItem>
+
             <SideBarItem
-                key="edit-parcel"
+                key="edit-parcel-second"
                 icon={
                     <EditIcon color="white"/>
                 }

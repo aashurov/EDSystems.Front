@@ -2,7 +2,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import ContainerLayout from "../components/app/ContainerLayout";
 import AddUserTab from "../components/user/AddUserTab";
 import AllUserTab from "../components/user/AllUsersTab";
-import CuriersTab from "../components/user/CuriersTab";
+import CouriersTab from "../components/user/CouriersTab";
 import ManagersTab from "../components/user/ManagersTab";
 import CustomersTab from "../components/user/Customers";
 import StaffTab from "../components/user/StaffTab";
@@ -36,7 +36,7 @@ export default function UsersContainer(){
             <ManagersTab/>
           )}
           {tab === UserTabs.Couriers && (
-            <CuriersTab/>
+            <CouriersTab/>
           )}
         </ContainerLayout>
     )

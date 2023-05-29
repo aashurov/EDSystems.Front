@@ -269,10 +269,19 @@ export default function AddParcelFormWrapper(){
         }
     },[request, parcelId, setInitialValues, paymentMethods, defaultValues])
 
-    console.log(initialValues)
-
     const onSumbit = useCallback((value: any)=>{
         if(parcelId !== ""){
+
+            const custom_images : any = [];
+            value.images.map((item: any)=>{
+                const image_item = {
+                    imageName: item.imageName,
+                    imageBytes: item.imageBytes,
+                }
+                custom_images.push(image_item)
+                console.log(item)
+            })
+
             const data = {
                 ...value,
                 code: value.code,
@@ -294,11 +303,12 @@ export default function AddParcelFormWrapper(){
                 parcelPlanId: Number(value.parcelPlanId.value),
                 parcelBranchFromId: Number(value.parcelBranchFromId.value),
                 parcelBranchToId: Number(value.parcelBranchToId.value),
+                parcelStatusId: value.parcelStatusId.value,
                 parcelSize: {
                     weight: Number(value.weight),
                     numberOfPoint: Number(value.numberOfPoint)
                 },
-                parcelImage: value.images, 
+                parcelImage: custom_images, 
                 parcelAddress: {
                     pickingUpAddress: value.pickupAddress,
                     deliveryAddress: value.deliveryAddress,

@@ -651,22 +651,27 @@ export default function AddParcelForm({
                                 <CheckBox 
                                     onChange={(value: boolean)=>onChangeSendSmsToTelegram(value)} 
                                     value={initialValues.sendSmsToTelegram}
+                                    checkboxClassName="me-2"
                                     className="bg-transparent w-100" 
                                     name="sendSmsToTelegram" 
                                     rightLabel="Telegram"/>
                             </div>
                             <div className="col-4">
                                 <CheckBox 
+                                checkboxClassName="me-2"
                                     onChange={(value: boolean)=>onChangeSendSmsToSender(value)} 
                                     value={initialValues.sendSmsToSender}
                                     className="bg-transparent w-100" 
                                     name="sendSmsToSender" 
                                     rightLabel="СМС отправителю"/>
                             </div>
+ 
+
                             <div className="col-4 d-flex">
                                 <CheckBox 
                                     onChange={(value: boolean)=>onChangeSendSmsToRecipient(value)}
                                     value={initialValues.sendSmsToRecipient} 
+                                    checkboxClassName="me-2"
                                     className="bg-transparent w-100" 
                                     name="sendSmsToRecipient" 
                                     rightLabel="СМС получателю"/>

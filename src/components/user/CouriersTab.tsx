@@ -4,7 +4,7 @@ import ContainerLayout from "../app/ContainerLayout";
 import UserManagerEditFormWrapper from "./UserManagerEditFromWrapper";
 import UserManagerTableWrapper from "./UserManagerTableWrapper";
 
-export default function CuriersTab(){
+export default function CouriersTab(){
 
   const [searchParams, setSearchParams] = useSearchParams();
   const page = useMemo(()=>searchParams.get("pageType")? searchParams.get("pageType") : "table",[searchParams])

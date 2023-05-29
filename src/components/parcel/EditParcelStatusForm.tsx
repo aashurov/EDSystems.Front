@@ -170,12 +170,13 @@ export default function EditParcelStatusForm({
                                     <CheckBox
                                         checkboxClassName="me-2"
                                         name="sendSmsToSender"
-                                        className="bg-transparent d-flex w-100 justify-content-start"
+                                        className="bg-transparent w-100" 
                                         rightLabel="СМС Отправителю"
                                         value={initialValues.sendSmsToSender}
                                         onChange={(event)=>onChangeSendSmsToSender(event)}
                                         />
                                 </div>
+
                                 <div className="col-4">
                                     <CheckBox
                                         checkboxClassName="me-2"
