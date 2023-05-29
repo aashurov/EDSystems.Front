@@ -154,7 +154,6 @@ export default function AddParcelFormWrapper(){
         request.get(`/Status/GetStatusList`,{
           headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`} 
         }).then((respon: any)=>{
-            console.log(respon)
             respon.data.statuses.map((item: any)=>{
                 const data = {
                     label: item.name,
@@ -279,11 +278,11 @@ export default function AddParcelFormWrapper(){
                     imageBytes: item.imageBytes,
                 }
                 custom_images.push(image_item)
-                console.log(item)
             })
 
             const data = {
-                ...value,
+                // ...value,
+                id: value.id,
                 code: value.code,
                 parcelCost: {
                     StateDeliveryToBranch: value.StateDeliveryToBranch,

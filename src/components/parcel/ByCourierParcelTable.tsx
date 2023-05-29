@@ -3,10 +3,10 @@ import Table from "../table/Table";
 
 interface Props{
     readonly data: any[];
+    readonly setIds: (value: any) => void;
 }
 
-export default function ByCourierParcelTable({data}:Props){
-    console.log(data)
+export default function ByCourierParcelTable({data, setIds}:Props){
     const headers:any = [
         {
             header: '№',
@@ -135,5 +135,5 @@ export default function ByCourierParcelTable({data}:Props){
         },
         
     ]
-    return <Table withCheckbox headers={headers} data={data}/>
+    return <Table withCheckbox selectRowCheckbox={setIds} headers={headers} data={data}/>
 }

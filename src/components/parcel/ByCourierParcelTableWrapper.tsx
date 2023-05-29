@@ -1,13 +1,15 @@
 import { useSearchParams } from "react-router-dom";
 import ByCourierParcelTable from "./ByCourierParcelTable";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParcelApiContext } from "../../api/parcel/ParcelApiContext";
 import TabPage from "../tabs/TabPage";
 import Button from "../button/Button";
+import { request } from "../../api/request";
 
 export default function ByCourierParcelTableWrapper(){
     const [search, setSearch] = useSearchParams();
     const couirerId = useMemo(()=>search.get("courierId")?search.get("courierId"):"",[])
+    const [ids, setIds] = useState([]);
 
 
     const pageSize = Number(search.get("pageSize") || 25);
@@ -23,18 +25,47 @@ export default function ByCourierParcelTableWrapper(){
         }
     },[couirerId, ParcelApi, setData])
 
+    const onPrint = useCallback(()=>{
+        const codes = [];
+        for(let i = 0; i<ids.length; i++){
+            const code = Number(data.filter((item: any)=>item.id === ids[0])[0].code);
+            codes.push(code)
+        }
+        const query = {
+            code: codes,
+            id: couirerId,
+        }
+        request.post(`/File/GetJobList`, query)
+        .then((response: any)=>{
+            const href = URL.createObjectURL(response.data);
+            const link = document.createElement('a');
+            link.href = href;
+            link.setAttribute('download', `${couirerId}.pdf`);
+            document.body.appendChild(link);
+            link.click();
+        
+            document.body.removeChild(link);
+            URL.revokeObjectURL(href);
+        })
+        .catch((error: any)=>console.log(error))
+    },[ids, data, request, couirerId])
+
     return (
         <TabPage
                 childrenClassName="p-3"
                 footerComponent={
                     <Button
                     className="px-3 py-1 bg-warning text-light mt-2"
+                    onClick={()=>onPrint()}
                     >
                         Print
                     </Button>
                 }
                 >
-            <ByCourierParcelTable data={data}/>
+            <ByCourierParcelTable 
+                    data={data}
+                    setIds={setIds}
+                    />
         </TabPage>
     )
 }
