@@ -110,7 +110,7 @@ export default function UserManagerTableWrapper({editRow, roleId}:UserManagerTab
                     setIsDelModal(true)
                  }}
                  byCourier={(row: any)=>{
-                    setId(row.id)
+                    setSearchParams({pageType: "curier-parcel-tab", courierId: row.id})
                  }}
                  data={data.items}/>
             <Modal

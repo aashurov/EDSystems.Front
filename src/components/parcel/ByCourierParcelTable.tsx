@@ -1,24 +1,12 @@
-import React from "react";
-import TableButton from "../button/TableButton";
-import EditIcon from "../icons/EditIcon";
-import Table from "../table/Table";
 import { DateFormatter } from "../../utils/DateFormatter";
-import EyeIcon from "../icons/EyeIcon";
-import { Console } from "console";
+import Table from "../table/Table";
 
-interface BranchTableProps{
-    readonly data: any;
-    readonly selectRow: (value: any) => void;
-    readonly selectRowForView: (value: any) => void;
-    readonly selectRowCheckbox: (value: any) => void;
+interface Props{
+    readonly data: any[];
 }
 
-export default function ParcelTable({
-    data, 
-    selectRow, 
-    selectRowForView,
-    selectRowCheckbox
-}:BranchTableProps){
+export default function ByCourierParcelTable({data}:Props){
+    console.log(data)
     const headers:any = [
         {
             header: '№',
@@ -140,45 +128,12 @@ export default function ParcelTable({
                         )
             },
         },
-        // {
-        //     header: 'Phone',
-        //     access: 'phone',
-        //     width: 200
-        // },
-        // {
-        //     header: 'Code',
-        //     access: 'code',
-        //     width: 200
-        // },
         {
             header: "...",
             access: 'edit',
-            ceil: (row: any)=>{
-                return (
-                            <div className="d-flex">
-                            <TableButton
-                                className="bg-warning"
-                                onClick={()=>selectRow(row)}
-                                >
-                                <EditIcon color="white" size={14}/>
-                            </TableButton>
-                            <TableButton
-                                className="bg-success ms-2"
-                                onClick={()=>selectRowForView(row)}
-                                >
-                                <EyeIcon color="white" size={14}/>
-                            </TableButton>
-                            </div>
-                        )
-            },
-            width: 100,
+            width: 60,
         },
         
     ]
-    return (
-        <Table 
-            selectRowCheckbox={selectRowCheckbox} 
-            data={data} 
-            headers={headers} 
-            withCheckbox={true}/>)
+    return <Table withCheckbox headers={headers} data={data}/>
 }

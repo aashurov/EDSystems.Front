@@ -150,11 +150,11 @@ export default function SideBarMenu(){
                                 >
                                 По курьерам
                             </SideBarItem>  
-                            <SideBarItem
+                            {/* <SideBarItem
                                 key="by-customers"
                                 >
                                 По клиентам
-                            </SideBarItem> 
+                            </SideBarItem>  */}
                         </AppMenu>
                     }
                     >

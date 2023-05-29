@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import ContainerLayout from "../app/ContainerLayout";
 //  import UserManagerEditFormWrapper from "./UserManagerEditFromWrapper";
 import ByUserManagerTableWrapper from "./ByUserManagerTableWrapper";
+import ByCourierParcelTableWrapper from "./ByCourierParcelTableWrapper";
 
 export default function CouriersTab(){
 
@@ -19,9 +20,9 @@ export default function CouriersTab(){
           
              />
             )}
-            {/* {page === "form" && (
-            // <UserManagerEditFormWrapper back={()=>setSearchParams({pageType: "table"})}/>
-           )} */}
+            {page === "curier-parcel-tab" && (
+            <ByCourierParcelTableWrapper/>
+           )}
         </ContainerLayout>
     )
 }

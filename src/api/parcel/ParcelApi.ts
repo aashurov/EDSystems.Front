@@ -20,7 +20,8 @@ export class ParcelApi extends ApiContext{
 
     public getAllParcelByCourier({pageNumber, pageSize, courierId}:GetAllParcelByCourier):Promise<any>{
        
-        return this.get(`/Parcel/GetParcelListWithPaginationByCourier?pageNumber=${pageNumber}&pageSize=${pageSize}&Code=${courierId}`)
+        return this.get(`/Parcel/GetParcelListWithPaginationByCourier?PageNumber=${pageNumber}&PageSize=${pageSize}&CouerierId=${courierId}`)
+        
     }
 
     public deleteParcel(del:any):Promise<any>{
