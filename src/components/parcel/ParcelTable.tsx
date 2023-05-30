@@ -5,19 +5,22 @@ import Table from "../table/Table";
 import { DateFormatter } from "../../utils/DateFormatter";
 import EyeIcon from "../icons/EyeIcon";
 import { Console } from "console";
+import PrintIcon from "../icons/PrintIcon";
 
 interface BranchTableProps{
     readonly data: any;
     readonly selectRow: (value: any) => void;
     readonly selectRowForView: (value: any) => void;
     readonly selectRowCheckbox: (value: any) => void;
+    readonly onPrint: (value: any) => void;
 }
 
 export default function ParcelTable({
     data, 
     selectRow, 
     selectRowForView,
-    selectRowCheckbox
+    selectRowCheckbox,
+    onPrint
 }:BranchTableProps){
     const headers:any = [
         {
@@ -167,6 +170,12 @@ export default function ParcelTable({
                                 onClick={()=>selectRowForView(row)}
                                 >
                                 <EyeIcon color="white" size={14}/>
+                            </TableButton>
+                            <TableButton
+                                className="bg-success ms-2"
+                                onClick={()=>onPrint(row)}
+                                >
+                                    <PrintIcon color="white"/>
                             </TableButton>
                             </div>
                         )

@@ -35,7 +35,14 @@ export default function ByCourierParcelTableWrapper(){
             code: codes,
             id: couirerId,
         }
-        request.post(`/File/GetJobList`, query)
+        request.post(`/File/GetJobList`, query, 
+        {
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem("token")}`,
+            },
+            responseType: 'blob',
+        }
+        )
         .then((response: any)=>{
             const href = URL.createObjectURL(response.data);
             const link = document.createElement('a');
@@ -49,6 +56,34 @@ export default function ByCourierParcelTableWrapper(){
         })
         .catch((error: any)=>console.log(error))
     },[ids, data, request, couirerId])
+
+    const onPrintInvoice = useCallback((value: any)=>{
+        const query = {
+            id: value.id,
+        }
+        request.post(`/File/GetInvoice`, 
+        query,
+        {
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem("token")}`,
+            },
+            responseType: 'blob',
+        }
+        )
+        .then((response: any)=>{
+            const href = URL.createObjectURL(response.data);
+            const link = document.createElement('a');
+            link.href = href;
+            link.setAttribute('download', `${couirerId}.pdf`);
+            document.body.appendChild(link);
+            link.click();
+        
+            document.body.removeChild(link);
+            URL.revokeObjectURL(href);
+        })
+        .catch((error: any)=>console.log(error))
+    },[request])
+
 
     return (
         <TabPage
@@ -65,6 +100,7 @@ export default function ByCourierParcelTableWrapper(){
             <ByCourierParcelTable 
                     data={data}
                     setIds={setIds}
+                    onPrint={(value: any)=>onPrintInvoice(value)}
                     />
         </TabPage>
     )
