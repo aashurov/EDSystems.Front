@@ -1,12 +1,17 @@
 import { DateFormatter } from "../../utils/DateFormatter";
+import TableButton from "../button/TableButton";
+import BookIcon from "../icons/BookIcon";
+import PrintIcon from "../icons/PrintIcon";
 import Table from "../table/Table";
 
 interface Props{
     readonly data: any[];
     readonly setIds: (value: any) => void;
+    readonly onPrint: (value: any) => void;
+
 }
 
-export default function ByCourierParcelTable({data, setIds}:Props){
+export default function ByCourierParcelTable({data, setIds, onPrint}:Props){
     const headers:any = [
         {
             header: '№',
@@ -132,6 +137,15 @@ export default function ByCourierParcelTable({data, setIds}:Props){
             header: "...",
             access: 'edit',
             width: 60,
+            ceil: (row: any)=>{
+                return (
+                           <TableButton 
+                                onClick={()=>onPrint(row)}
+                                className="bg-success">
+                                <PrintIcon color="white"/>
+                           </TableButton> 
+                        )
+            },
         },
         
     ]

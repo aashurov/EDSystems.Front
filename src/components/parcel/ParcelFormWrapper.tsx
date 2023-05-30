@@ -214,11 +214,11 @@ export default function AddParcelFormWrapper(){
                     id: value.id,
                     code: value.code,
                     senderId: {
-                        label: value.sender.firstName + " " + value.sender.lastName + " " + value.sender.phoneNumber,
+                        label: value.sender.fullName + " " + value.sender.phoneNumber,
                         value: value.sender.id
                     },
                     recipientId: {
-                        label: value.recipient.firstName + " " + value.recipient.lastName + " " + value.recipient.phoneNumber,
+                        label: value.recipient.fullName + " " + value.recipient.phoneNumber,
                         value: value.recipient.id
                     },
                     parcelBranchFromId: {
@@ -233,7 +233,7 @@ export default function AddParcelFormWrapper(){
                     images: value.parcelImage,
                     description: value.parcelDescription.description,
                     pickupAddress: value.parcelAddress.pickingUpAddress,
-                    deliveryAddress: value.parcelAddress.deliveryUpAddress,
+                    deliveryAddress: value.parcelAddress.deliveryAddress,
                     numberOfPoint: value.parcelSize.numberOfPoint,
                     parcelPlanId: {
                         label: value.parcelPlan.name,
@@ -248,11 +248,11 @@ export default function AddParcelFormWrapper(){
                     costPickingUp: value.parcelCost.costPickingUp,
                     paymentMethod: paymentMethods && paymentMethods.filter((item)=>item.value === value.parcelCost.paymentMethodId)[0],
                     senderCourierId: value.senderCourier?  {
-                        label: value.senderCourier?.firstName + " " + value.senderCourier?.lastName + " " + value.senderCourier?.phoneNumber,
+                        label: value.senderCourier?.fullName + " " + value.senderCourier?.phoneNumber,
                         value: value.senderCourier?.id
                     }: labeValue,
                     recipientCourierId: value.recipientCourier?{
-                         label: value.recipientCourier?.firstName + " " + value.recipientCourier?.lastName + " " + value.recipientCourier?.phoneNumber,
+                         label: value.recipientCourier?.fullName + " " + value.recipientCourier?.phoneNumber,
                         value: value.recipientCourier?.id
                     }: labeValue,
                     StateDeliveryToBranch: value.parcelCost.stateDeliveryToBranch,

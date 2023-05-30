@@ -13,6 +13,7 @@ import { Form, Formik } from "formik";
 import { object, string } from "yup";
 import InputField from "../form/InputField";
 import { update } from "immupdate";
+import { request } from "../../api/request";
 
 interface BranchTableWrapperProps{
     readonly selectRow: (value: any) => void;
@@ -72,6 +73,33 @@ export default function ParcelTableWrapper({
 
 },[ParcelApi])
 
+const onPrintInvoice = useCallback((value: any)=>{
+    const query = {
+        id: value.id,
+    }
+    request.post(`/File/GetInvoice`, 
+    query,
+    {
+        headers: {
+            "Authorization" : `Bearer ${localStorage.getItem("token")}`,
+        },
+        responseType: 'blob',
+    }
+    )
+    .then((response: any)=>{
+        const href = URL.createObjectURL(response.data);
+        const link = document.createElement('a');
+        link.href = href;
+        link.setAttribute('download', `${"Invoice"}.pdf`);
+        document.body.appendChild(link);
+        link.click();
+    
+        document.body.removeChild(link);
+        URL.revokeObjectURL(href);
+    })
+    .catch((error: any)=>console.log(error))
+},[request])
+
     return ( 
         <TabPage
             childrenClassName="p-2"
@@ -119,6 +147,7 @@ export default function ParcelTableWrapper({
                  selectRowCheckbox={setIds} 
                  selectRow={selectRow}
                  selectRowForView={selectRowForView} 
+                 onPrint={onPrintInvoice}
                  data={data.items}/>
             <Modal
                 width="500px"
