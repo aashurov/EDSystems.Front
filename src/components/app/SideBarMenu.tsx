@@ -350,16 +350,22 @@ export default function SideBarMenu(){
                         defaultTab="all-parcels"
                         onChangeTab={(value: any)=>navigate(`/app/parcels/${value}`)}
                         >
+                             <SideBarItem
+                            key="parcel-form"
+                            >
+                            Создать
+                        </SideBarItem>  
                         <SideBarItem
                             key="all-parcels"
                             >
                             Все
                         </SideBarItem>
+                       
                         <SideBarItem
-                            key="parcel-form"
-                            >
-                            Создать
-                        </SideBarItem>  
+                                key="by-couriers"
+                                >
+                                По курьерам
+                            </SideBarItem> 
                     </AppMenu>
                 }
                 >
