@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const request = axios.create({
      
-      baseURL: myUrl,
-    // baseURL: "https://localhost:7271/api/",
+  //    baseURL: myUrl,
+     baseURL: "https://localhost:7271/api/",
     headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`}
 })

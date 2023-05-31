@@ -29,7 +29,7 @@ const validationSchema = object({
     costDeliveryToBranch: string(),
     costDeliveryToPoint: string(),
     costPickingUp: string(),
-    paymentMethod: mixed<SelectType>().required("Required!"),
+    paymentMethod: mixed<SelectType>(), //.required("Required!"),
     senderCourierId: mixed<SelectType>(),
     recipientCourierId: mixed<SelectType>(),
     StateDeliveryToBranch: bool(),
@@ -527,6 +527,7 @@ console.log(result)
                                     <div className="col-6">
                                         <InputGroup label="Стоимость перевозки до филиала">
                                             <InputField 
+                                            width={500}
                                                 disabled 
                                                 inputClassName="border-0" 
                                                 value={"Стоимость перевозки оплачен?"} 
@@ -547,6 +548,7 @@ console.log(result)
                                     <div className="col-6">
                                          <InputGroup label="Стоимость доставки до двери">
                                             <InputField 
+                                            width={500}
                                                 disabled 
                                                 inputClassName="border-0" 
                                                 value={"Стоимость доставки оплачен?"} 
@@ -566,6 +568,7 @@ console.log(result)
                                     <div className="col-6 mt-3">
                                         <InputGroup label="Стоимость забора">
                                             <InputField 
+                                            width={500}
                                                 disabled 
                                                 inputClassName="border-0" 
                                                 value={"С курьером рассчитан?"} 
@@ -589,8 +592,6 @@ console.log(result)
                                             name="paymentMethod" 
                                             label="Метод оплаты"/>
                                     </div>
-                                    
-                                    
                                 </div>
                             </GroupBox>
                         </div>
@@ -601,6 +602,7 @@ console.log(result)
                                     <div className="col-6 mt-3">
                                         <InputGroup label="Курьер для забора посылки">
                                             <InputField 
+                                            width={500}
                                                 disabled 
                                                 inputClassName="border-0" 
                                                 value={"С курьером рассчитан?"} 
@@ -619,6 +621,7 @@ console.log(result)
                                     <div className="col-6 mt-3">
                                         <InputGroup label="Курьер для доставки посылки">
                                             <InputField 
+                                            width={500}
                                                 disabled 
                                                 inputClassName="border-0" 
                                                 value={"С курьером рассчитан?"} 
