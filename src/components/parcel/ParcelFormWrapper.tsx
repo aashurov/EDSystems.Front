@@ -270,7 +270,6 @@ export default function AddParcelFormWrapper(){
 
     const onSumbit = useCallback((value: any)=>{
         if(parcelId !== ""){
-
             const custom_images : any = [];
             value.images.map((item: any)=>{
                 const image_item = {
@@ -326,9 +325,9 @@ export default function AddParcelFormWrapper(){
                     navigator('/app/parcels/all-parcels')
                 }).catch((err: any)=>toast.error(err.message))
         }else{
-            if(value.paymentMethod.value === ""){
-                toast.warning("Выберите метод платежа!")
-            }else {
+            // if(value.paymentMethod.value === ""){
+            //     toast.warning("Выберите метод платежа!")
+            // }else {
             const data = {
                 code: value.code,
                 parcelCost: {
@@ -364,14 +363,14 @@ export default function AddParcelFormWrapper(){
                 sendSmsToRecipient: value.sendSmsToRecipient,
                 sendSmsToSender: value.sendSmsToSender,
                 sendSmsToTelegram: value.sendSmsToTelegram,
-            }
+            }  
             request.post("/Parcel/Createparcel", data ,{
                     headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`}
                 }).then(()=>{
                     toast.success("Посылка успешно добавлена!")
                     navigator('/app/parcels/all-parcels')
                 }).catch((err: any)=>toast.error(err.message))
-            }
+            // }
         }
     },[request, toast, profile, navigator])
 

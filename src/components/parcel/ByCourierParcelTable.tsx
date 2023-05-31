@@ -50,7 +50,7 @@ export default function ByCourierParcelTable({data, setIds, onPrint}:Props){
         {
             header: 'Направление',
             access: 'sender',
-            width: 130,
+            width: 180,
             ceil: (row: any)=>{
                 return (
                             <>
@@ -74,7 +74,7 @@ export default function ByCourierParcelTable({data, setIds, onPrint}:Props){
         {
             header: 'Вес',
             access: 'parcelSize',
-            width: 50,
+            width: 120,
             ceil: (row: any)=>{
                 return (
                             <>
