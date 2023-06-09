@@ -28,9 +28,9 @@ export default function AppView({
                     <div className="col-6 p-4">
                         {/* { <p><strong>Статус - </strong> { data.parcelStatus[0]?.status.name} </p> } */}
                         {/* {<p><strong>Дата регистрации - </strong> {DateFormatter(data.dateCreated)}</p>} */}
-                        <p><strong>Отправитель - </strong> { data.sender?.firstName} { data.sender?.lastName } { data.sender?.phoneNumber}</p>
-                        <p><strong>Получатель - </strong> { data.recipient?.firstName} { data.recipient?.lastName } { data.recipient?.phoneNumber}</p>
-                        <p><strong>Направление  - </strong> { data.fromBranch?.city} - { data.toBranch?.city }</p>
+                        <p><strong>Отправитель - </strong> { data.sender?.fullName} { data.sender?.phoneNumber}</p>
+                        <p><strong>Получатель - </strong> { data.recipient?.fullName } { data.recipient?.phoneNumber}</p>
+                        <p><strong>Направление  - </strong> { data.fromBranch?.name} - { data.toBranch?.name }</p>
                         <p><strong>Адрес доставки - </strong> { data.parcelAddress?.deliveryAddress}</p>
                         <p><strong>Адрес забора - </strong> { data.parcelAddress?.pickingUpAddress}</p>
                         <p><strong>Вес посылки - </strong> { data.parcelSize?.weight} кг</p>
@@ -41,9 +41,9 @@ export default function AppView({
                         <p><strong>Стоимость забора - </strong> { data.parcelCost?.costPickingUp}  $ { data.parcelCost?.statePickingUp ? "Оплачено" : "Не Оплачено"} </p>
                         <p><strong>Итоговая стоимость услуги - </strong> { Number(data.parcelCost?.costDeliveryToBranch) + Number(data.parcelCost?.costDeliveryToPoint) + Number(data.parcelCost?.costPickingUp)} $</p> 
                         <p><strong>Метод оплаты - </strong> { data.parcelCost?.paymentMethod.name.toString() }</p>
-                        <p><strong>Курьер для забора - </strong> { data.senderCourier?.firstName} { data.senderCourier?.lastName } { data.senderCourier?.phoneNumber}</p>
-                        <p><strong>Курьер для доставки - </strong> { data.recipinetCourier?.firstName} { data.recipinetCourier?.lastName } { data.recipinetCourier?.phoneNumber}</p>
-                        <p><strong>Оператор - </strong> { data.senderStaff?.firstName} { data.senderStaff?.lastName } { data.senderStaff?.phoneNumber}</p>
+                        <p><strong>Курьер для забора - </strong> { data.senderCourier?.fullName} { data.senderCourier?.phoneNumber}</p>
+                        <p><strong>Курьер для доставки - </strong> { data.recipinetCourier?.fullName} { data.recipinetCourier?.phoneNumber}</p>
+                        <p><strong>Оператор - </strong> { data.senderStaff?.fullName } { data.senderStaff?.phoneNumber}</p>
                     </div>
                 </div>  
         </div>

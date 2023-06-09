@@ -29,7 +29,7 @@ const validationSchema = object({
     costDeliveryToBranch: string(),
     costDeliveryToPoint: string(),
     costPickingUp: string(),
-    paymentMethod: mixed<SelectType>(), //.required("Required!"),
+   // paymentMethods: mixed<SelectType>(), //.required("Required!"),
     senderCourierId: mixed<SelectType>(),
     recipientCourierId: mixed<SelectType>(),
     StateDeliveryToBranch: bool(),
@@ -96,7 +96,7 @@ export default function AddParcelForm({
     const onChangePaymentMethod = useCallback((value: any)=>{
         setInitialValues((prev: any)=>
             update(prev, {
-                paymentMethod: {
+                paymentMethods: {
                     label: value.label,
                     value: value.value
                 }
@@ -393,22 +393,27 @@ export default function AddParcelForm({
 
     const onChangeImage = useCallback((value: any)=>{
 
-        var old_array:any = [...initialValues.images];
-        var new_array:any = Object.keys(value).map((key) => 
-        {
-           return { 
-            imageBytes: value[key],
-            imageName: ""
-         }
-        });
-        const result = old_array.concat(new_array);
-console.log(result)
+        let arr: any = [...initialValues.images];
 
-        setInitialValues((prev: any)=>
-        update(prev, {
-            images: result,
-        }))
-    },[setInitialValues, initialValues.images])
+        for(let i = 0; i<value.target.files.length; i++){
+            const reader = new FileReader();
+
+            reader.onloadend = ( ) => {
+                const data = {
+                    imageBytes: reader.result?.toString(),
+                    imageName: "",
+                }
+                arr.push(data);
+                setInitialValues((prev: any)=>
+                update(prev, {
+                    images: arr,
+                }))
+            }
+
+            reader.readAsDataURL(value.target.files[i]);
+        }
+        
+    },[setInitialValues, initialValues])
 
     const deleteImage = useCallback((value: number)=>{
         const images = [...initialValues.images]

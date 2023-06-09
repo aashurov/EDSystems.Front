@@ -28,7 +28,7 @@ const defaultValues = {
         costDeliveryToBranch: 0,
         costDeliveryToPoint: 0,
         costPickingUp: 0,
-        paymentMethod: labeValue,
+        paymentMethods: labeValue,
         senderCourierId: labeValue,
         recipientCourierId: labeValue   ,
         StateDeliveryToBranch: false,
@@ -67,7 +67,7 @@ export default function AddParcelFormWrapper(){
         costDeliveryToBranch: 0,
         costDeliveryToPoint: 0,
         costPickingUp: 0,
-        paymentMethod: labeValue,
+        paymentMethods: labeValue,
         senderCourierId: labeValue,
         recipientCourierId: labeValue   ,
         StateDeliveryToBranch: false,
@@ -240,13 +240,13 @@ export default function AddParcelFormWrapper(){
                         value: value.parcelPlan.id
                     },
                     parcelStatusId: {
-                        label: parcelStatusInResponse.status.name,
-                        value: parcelStatusInResponse.status.id
+                        label: parcelStatusInResponse.statuses.name,
+                        value: parcelStatusInResponse.statuses.id
                     },
                     costDeliveryToBranch: value.parcelCost.costDeliveryToBranch,
                     costDeliveryToPoint: value.parcelCost.costDeliveryToPoint,
                     costPickingUp: value.parcelCost.costPickingUp,
-                    paymentMethod: paymentMethods && paymentMethods.filter((item)=>item.value === value.parcelCost.paymentMethodId)[0],
+                    paymentMethods: paymentMethods && paymentMethods.filter((item)=>item.value === value.parcelCost.paymentMethodId)[0],
                     senderCourierId: value.senderCourier?  {
                         label: value.senderCourier?.fullName + " " + value.senderCourier?.phoneNumber,
                         value: value.senderCourier?.id
@@ -269,6 +269,7 @@ export default function AddParcelFormWrapper(){
     },[request, parcelId, setInitialValues, paymentMethods, defaultValues])
 
     const onSumbit = useCallback((value: any)=>{
+        console.log(value)
         if(parcelId !== ""){
             const custom_images : any = [];
             value.images.map((item: any)=>{
@@ -291,7 +292,7 @@ export default function AddParcelFormWrapper(){
                     costDeliveryToPoint: Number(value.costDeliveryToPoint),
                     costDeliveryToBranch: Number(value.costDeliveryToBranch),
                     currencyId: 1,
-                    paymentMethodId: value.paymentMethod.value,
+                    paymentMethodId: value.paymentMethods.value,
                 },
                 senderId: Number(value.senderId.value),
                 recipientId: Number(value.recipientId.value),
@@ -328,7 +329,18 @@ export default function AddParcelFormWrapper(){
             // if(value.paymentMethod.value === ""){
             //     toast.warning("Выберите метод платежа!")
             // }else {
+        
+            console.log(value)
+
+            let paymentMetId:any = "";
+            if(value.paymentMethods.value !== ""){
+                paymentMetId = value.paymentMethods.value
+            }else {
+                paymentMetId = null;
+            }
+
             const data = {
+        
                 code: value.code,
                 parcelCost: {
                     StateDeliveryToBranch: value.StateDeliveryToBranch,
@@ -338,7 +350,7 @@ export default function AddParcelFormWrapper(){
                     costDeliveryToPoint: Number(value.costDeliveryToPoint),
                     costDeliveryToBranch: Number(value.costDeliveryToBranch),
                     currencyId: 1,
-                    paymentMethodId: value.paymentMethod.value,
+                    paymentMethodId: paymentMetId,
                 },
                 senderId: Number(value.senderId.value),
                 recipientId: Number(value.recipientId.value),
