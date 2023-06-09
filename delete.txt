@@ -1,0 +1,60 @@
+ //For Admin
+       new User() { Id = 1, UserName = "Administrator", NormalizedUserName = "", Email = "administrator@gmail.com", NormalizedEmail = "ADMINISTRATOR@GMAIL.COM", FirstName = "ED", LastName = "Administrator", Address = "Республика Узбекистан, г. Ташкент, Кашгар 11, 100099", PhoneNumber = "998970000675", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+        ////For staff  Tashkent
+       new User() { Id = 2, UserName = "9989317109660", NormalizedUserName = "9989317109660", Email = "9989317109660@gmail.com", NormalizedEmail = "9989317109660@GMAIL.COM", FirstName = "EDT Javohir", LastName = "Xalimov", Address = "Республика Узбекистан, г. Ташкент, Кашгар 11, 100099", PhoneNumber = "9989317109660", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+       new User() { Id = 3, UserName = "998998859559", NormalizedUserName = "998998859559", Email = "998998859559@gmail.com", NormalizedEmail = "998998859559@GMAIL.COM", FirstName = "EDT Javohir", LastName = "Xakimov", Address = "Республика Узбекистан, г. Ташкент, Кашгар 11, 100099", PhoneNumber = "998998859559", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+       new User() { Id = 4, UserName = "998994885995", NormalizedUserName = "998994885995", Email = "998994885995@gmail.com", NormalizedEmail = "998994885995@GMAIL.COM", FirstName = "EDT Sadulla", LastName = "XXX", Address = "Республика Узбекистан, г. Ташкент, Кашгар 11, 100099", PhoneNumber = "998994885995", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+       new User() { Id = 5, UserName = "998944322510", NormalizedUserName = "998944322510", Email = "998944322510@gmail.com", NormalizedEmail = "998944322510@GMAIL.COM", FirstName = "EDT Xojiakbar", LastName = "Ibragimxadjayev", Address = "Республика Узбекистан, г. Ташкент, Кашгар 11, 100099", PhoneNumber = "998944322510", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+       new User() { Id = 6, UserName = "998990500033", NormalizedUserName = "998990500033", Email = "998990500033@gmail.com", NormalizedEmail = "998990500033@GMAIL.COM", FirstName = "EDT Zubayr", LastName = "Abdullayev", Address = "Республика Узбекистан, г. Ташкент, Кашгар 11, 100099", PhoneNumber = "998990500033", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+       ////For staff Almati 
+       new User() { Id = 7, UserName = "77073059559", NormalizedUserName = "77073059559", Email = "77073059559@gmail.com", NormalizedEmail = "77073059559@GMAIL.COM", FirstName = "EDA Ubaydullo", LastName = "XXX", Address = "Республика Узбекистан, г. Ташкент, Кашгар 11, 100099", PhoneNumber = "77073059559", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+       ////For staff Moscow
+       new User() { Id = 8, UserName = "79266800899", NormalizedUserName = "79266800899", Email = "79266800899@gmail.com", NormalizedEmail = "79266800899@GMAIL.COM", FirstName = "EDM Shohruh", LastName = "Muzaffarov", Address = "Российская Федерация, Московская область, г. Москва, Академический район, улица Винокурова 7/5, корпус 3, индекс 117449", PhoneNumber = "79266800899", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+       new User() { Id = 9, UserName = "79295896272", NormalizedUserName = "79295896272", Email = "79295896272@gmail.com", NormalizedEmail = "79295896272@GMAIL.COM", FirstName = "EDM Tursunali", LastName = "Zakirov", Address = "Российская Федерация, Московская область, г. Москва, Академический район, улица Винокурова 7/5, корпус 3, индекс 117449", PhoneNumber = "79295896272", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+       new User() { Id = 10, UserName = "79037841000", NormalizedUserName = "79037841000", Email = "79037841000@gmail.com", NormalizedEmail = "79037841000@GMAIL.COM", FirstName = "EDM Axror", LastName = "Nizamov", Address = "Российская Федерация, Московская область, г. Москва, Академический район, улица Винокурова 7/5, корпус 3, индекс 117449", PhoneNumber = "79037841000", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+       new User() { Id = 11, UserName = "79850370341", NormalizedUserName = "79850370341", Email = "79850370341@gmail.com", NormalizedEmail = "79850370341@GMAIL.COM", FirstName = "EDM Abdulhakim", LastName = "Mahmudov", Address = "Российская Федерация, Московская область, г. Москва, Академический район, улица Винокурова 7/5, корпус 3, индекс 117449", PhoneNumber = "79850370341", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+       new User() { Id = 12, UserName = "79963321030", NormalizedUserName = "79963321030", Email = "79963321030@gmail.com", NormalizedEmail = "79963321030@GMAIL.COM", FirstName = "EDM Umar", LastName = "Temirov", Address = "Российская Федерация, Московская область, г. Москва, Академический район, улица Винокурова 7/5, корпус 3, индекс 117449", PhoneNumber = "79963321030", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+       new User() { Id = 13, UserName = "79163870009", NormalizedUserName = "79163870009", Email = "79163870009@gmail.com", NormalizedEmail = "79163870009@GMAIL.COM", FirstName = "EDM Shaxboz", LastName = "Tojiboyev", Address = "Российская Федерация, Московская область, г. Москва, Академический район, улица Винокурова 7/5, корпус 3, индекс 117449", PhoneNumber = "79163870009", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+       new User() { Id = 14, UserName = "79296800899", NormalizedUserName = "79296800899", Email = "79296800899@gmail.com", NormalizedEmail = "79296800899@GMAIL.COM", FirstName = "EDMoscow", LastName = "Abror", Address = "Российская Федерация, Московская область, г. Москва, Академический район, улица Винокурова 7/5, корпус 3, индекс 117449", PhoneNumber = "79296800899", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+       new User() { Id = 15, UserName = "79150275927", NormalizedUserName = "79150275927", Email = "79150275927@gmail.com", NormalizedEmail = "79150275927@GMAIL.COM", FirstName = "EDM Shuxratjon", LastName = "Yuldashev", Address = "Российская Федерация, Московская область, г. Москва, Академический район, улица Винокурова 7/5, корпус 3, индекс 117449", PhoneNumber = "79150275927", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+       ////For staff Dushanbe
+       new User() { Id = 16, UserName = "992209362525", NormalizedUserName = "992209362525", Email = "992209362525@gmail.com", NormalizedEmail = "992209362525@GMAIL.COM", FirstName = "EDD Faromuz", LastName = "Xamidov", Address = "Душанбе 122", PhoneNumber = "992209362525", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+       ////For staff Bishkek
+       new User() { Id = 17, UserName = "996999441111", NormalizedUserName = "996999441111", Email = "996999441111@gmail.com", NormalizedEmail = "996999441111@GMAIL.COM", FirstName = "EDB Sherzod", LastName = "Yakubjanov", Address = "Киргизия, Бишкек, Жибек-Жолу д 443/1", PhoneNumber = "996999441111", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+
+
+      ////For Couriers
+      new User() { Id = 18, UserName = "79680977486", NormalizedUserName = "79680977486", Email = "79680977486@gmail.com", NormalizedEmail = "79680977486@GMAIL.COM", FirstName = "EDM Davlatjon", LastName = "Jumayev", Address = "Российская Федерация, Московская область, г. Москва, Академический район, улица Винокурова 7/5, корпус 3, индекс 117449", PhoneNumber = "79680977486", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+      new User() { Id = 19, UserName = "79067628181", NormalizedUserName = "79067628181", Email = "79067628181@gmail.com", NormalizedEmail = "79067628181@GMAIL.COM", FirstName = "EDM Sergey", LastName = "Taxtin", Address = "Российская Федерация, Московская область, г. Москва, Академический район, улица Винокурова 7/5, корпус 3, индекс 117449", PhoneNumber = "79067628181", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+      new User() { Id = 20, UserName = "79165438448", NormalizedUserName = "79165438448", Email = "79165438448@gmail.com", NormalizedEmail = "79165438448@GMAIL.COM", FirstName = "EDM Odiljon", LastName = "Zakirov", Address = "Российская Федерация, Московская область, г. Москва, Академический район, улица Винокурова 7/5, корпус 3, индекс 117449", PhoneNumber = "79165438448", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+      new User() { Id = 21, UserName = "79259592447", NormalizedUserName = "79259592447", Email = "79259592447@gmail.com", NormalizedEmail = "79259592447@GMAIL.COM", FirstName = "EDM Raxmon", LastName = "Mamajonov", Address = "Российская Федерация, Московская область, г. Москва, Академический район, улица Винокурова 7/5, корпус 3, индекс 117449", PhoneNumber = "79259592447", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+      new User() { Id = 22, UserName = "79015672717", NormalizedUserName = "79015672717", Email = "79015672717@gmail.com", NormalizedEmail = "79015672717@GMAIL.COM", FirstName = "EDM Jasur", LastName = "Ergashev", Address = "Российская Федерация, Московская область, г. Москва, Академический район, улица Винокурова 7/5, корпус 3, индекс 117449", PhoneNumber = "79015672717", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+      new User() { Id = 23, UserName = "79950998020", NormalizedUserName = "79950998020", Email = "79950998020@gmail.com", NormalizedEmail = "79950998020@GMAIL.COM", FirstName = "EDM Javlonbek", LastName = "Qurbonaliyev", Address = "Российская Федерация, Московская область, г. Москва, Академический район, улица Винокурова 7/5, корпус 3, индекс 117449", PhoneNumber = "79950998020", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+      new User() { Id = 24, UserName = "79663263564", NormalizedUserName = "79663263564", Email = "79663263564@gmail.com", NormalizedEmail = "79663263564@GMAIL.COM", FirstName = "EDM Sobirov", LastName = "Samandarbek", Address = "Российская Федерация, Московская область, г. Москва, Академический район, улица Винокурова 7/5, корпус 3, индекс 117449", PhoneNumber = "79663263564", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now },
+
+      new User() { Id = 25, UserName = "79776110815", NormalizedUserName = "79776110815", Email = "79776110815@gmail.com", NormalizedEmail = "79776110815@GMAIL.COM", FirstName = "SDEK", LastName = "", Address = "Российская Федерация, Московская область, г. Москва, Академический район, улица Винокурова 7/5, корпус 3, индекс 117449", PhoneNumber = "79776110815", SecurityStamp = Guid.NewGuid().ToString("D"), PasswordHash = password, DateCreated = _dateTimeService.Now }
+
+      );

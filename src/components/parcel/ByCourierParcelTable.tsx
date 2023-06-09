@@ -115,7 +115,7 @@ export default function ByCourierParcelTable({data, setIds, onPrint}:Props){
                 return row.parcelStatus.map((item:any, index: number)=>{
                    if(item.isCurrent){
                     return <div className="text-success fw-bold rounded ps-2 py-1 mb-1">
-                    {item.status.name}
+                    {item.statuses.name}
                     </div>
                    }
                  })
