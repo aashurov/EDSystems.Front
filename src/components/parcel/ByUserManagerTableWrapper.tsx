@@ -112,6 +112,9 @@ export default function UserManagerTableWrapper({editRow, roleId}:UserManagerTab
                  byCourier={(row: any)=>{
                     setSearchParams({pageType: "curier-parcel-tab", courierId: row.id})
                  }}
+                 byCourierPickup={(row: any)=>{
+                    setSearchParams({pageType: "curier-parcel-tab", courierId: row.id})
+                 }}
                  data={data.items}/>
             <Modal
                 width="500px"

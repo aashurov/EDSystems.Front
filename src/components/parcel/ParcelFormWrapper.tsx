@@ -38,7 +38,7 @@ const defaultValues = {
         StateRecipientCourierId: false,
         sendSmsToRecipient: false,
         sendSmsToSender: false,
-        sendSmsToTelegram: false,
+        sendSmsToTelegram: true,
 }
 
 interface SelectType{
@@ -75,7 +75,7 @@ export default function AddParcelFormWrapper(){
         StateRecipientCourierId: false,
         sendSmsToRecipient: false,
         sendSmsToSender: false,
-        sendSmsToTelegram: false,
+        sendSmsToTelegram: true,
     })
     const [senders, setSenders] = useState<any[]>([])
     const [receipents, setReceipents] = useState<any[]>([])
@@ -233,6 +233,7 @@ export default function AddParcelFormWrapper(){
                     pickupAddress: value.parcelAddress.pickingUpAddress,
                     deliveryAddress: value.parcelAddress.deliveryAddress,
                     numberOfPoint: value.parcelSize.numberOfPoint,
+                    
                     parcelPlanId: {
                         label: value.parcelPlan.name,
                         value: value.parcelPlan.id
@@ -258,7 +259,8 @@ export default function AddParcelFormWrapper(){
                     StatePickingUp: value.parcelCost.StatePickingUp,
                     StateDeliveryToPoint: value.parcelCost.StateDeliveryToPoint,
                     StateSenderCourierId: false,
-                    StateRecipientCourierId: false,
+                    StateRecipientCourierId: false
+                
                 }
                  setInitialValues(data)
             }).catch((error)=>console.log(error))
@@ -383,7 +385,8 @@ export default function AddParcelFormWrapper(){
                 },
                 sendSmsToRecipient: value.sendSmsToRecipient,
                 sendSmsToSender: value.sendSmsToSender,
-                sendSmsToTelegram: value.sendSmsToTelegram,
+                 sendSmsToTelegram: value.sendSmsToTelegram,
+                
             }  
             console.log(data)
             request.post("/Parcel/Createparcel", data ,{

@@ -10,3 +10,4 @@ export default function EyeIcon({size = 15, color = "black"}:Props){
         </svg>
     )
 }
+

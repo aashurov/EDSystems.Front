@@ -60,7 +60,7 @@ export default function ParcelTable({
         {
             header: 'Направление',
             access: 'sender',
-            width: 180,
+            width: 190,
             ceil: (row: any)=>{
                 return (
                             <>
@@ -108,7 +108,7 @@ export default function ParcelTable({
         {
             header: 'Итого',
             access: 'summa',
-            width: 40,
+            width: 80,
             ceil: (row: any)=>{
                 return (
                             <>

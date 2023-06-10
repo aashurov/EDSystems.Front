@@ -290,7 +290,6 @@ export default function AddParcelForm({
         )
     },[setInitialValues])
 
-
     const onChangeRecipientCourierId = useCallback((value: any)=>{
         setInitialValues((prev: any)=>
             update(prev, {
@@ -504,13 +503,20 @@ export default function AddParcelForm({
                                             options={plans} 
                                             label="Тариф"/>
                                     </div>
-                                    <div className="col-3">
-                                        <SelectPickerField 
-                                            name="parcelStatusId" 
-                                            onChanges={(value: any)=>onChangeParcelStatusId(value)}  
-                                            options={statuses} 
-                                            label="Статус"/>
-                                    </div>
+
+    {initialValues.id && (
+        <div className="col-3">
+        <SelectPickerField 
+            name="parcelStatusId" 
+            onChanges={(value: any)=>onChangeParcelStatusId(value)}  
+            options={statuses} 
+            label="Статус"/>
+       </div>
+    )
+}
+                                 
+                                
+                                
                                 </div>
                             </GroupBox>
                         </div>
@@ -530,7 +536,8 @@ export default function AddParcelForm({
                                             <CheckBox 
                                                 onChange={(event)=>onChangeStateDeliveryToBranch(event)} 
                                                 value={initialValues.StateDeliveryToBranch} 
-                                                name="StateDeliveryToBranch"/>
+                                                name="StateDeliveryToBranch"
+                                                />
                                             <InputField 
                                                 value={initialValues.costDeliveryToBranch} 
                                                 type="number" 
