@@ -120,7 +120,7 @@ export default function ParcelTable({
         {
             header: 'Статус',
             access: 'status',
-            width: 100,
+            width: 120,
             ceil: (row: any) => {
                 return row.parcelStatus.map((item:any, index: number)=>{
                    if(item.isCurrent){

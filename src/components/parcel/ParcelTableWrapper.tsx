@@ -90,7 +90,7 @@ const onPrintInvoice = useCallback((value: any)=>{
         const href = URL.createObjectURL(response.data);
         const link = document.createElement('a');
         link.href = href;
-        link.setAttribute('download', `${"Invoice"}.pdf`);
+        link.setAttribute('download', `${value.code}.pdf`);
         document.body.appendChild(link);
         link.click();
     

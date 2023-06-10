@@ -47,7 +47,7 @@ export default function ByCourierParcelTableWrapper(){
             const href = URL.createObjectURL(response.data);
             const link = document.createElement('a');
             link.href = href;
-            link.setAttribute('download', `${couirerId}.pdf`);
+            link.setAttribute('download', `JobList.pdf`);
             document.body.appendChild(link);
             link.click();
         
@@ -74,7 +74,7 @@ export default function ByCourierParcelTableWrapper(){
             const href = URL.createObjectURL(response.data);
             const link = document.createElement('a');
             link.href = href;
-            link.setAttribute('download', `${couirerId}.pdf`);
+            link.setAttribute('download', `${value.code}.pdf`);
             document.body.appendChild(link);
             link.click();
         

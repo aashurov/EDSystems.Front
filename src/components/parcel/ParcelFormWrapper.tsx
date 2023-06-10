@@ -46,8 +46,6 @@ interface SelectType{
     readonly value: string;
 }
 
-
-
 export default function AddParcelFormWrapper(){
     
     const [initialValues, setInitialValues] = useState({
@@ -165,7 +163,6 @@ export default function AddParcelFormWrapper(){
         
     },[request, toast, setParcelStatus]);
 
-
     const getSendersBySearching = useCallback((value: string)=>{
         if(value != ""){
             request.get(`/UserManager/SearchUserWithSkip?searchText=${value}&Skip=${0}&Top=${20}`,{
@@ -209,6 +206,7 @@ export default function AddParcelFormWrapper(){
             request.get(`/Parcel/GetParcelDetailsById/${parcelId}`).then((response)=>{
                 const parcelStatusInResponse = response.data.parcelStatus.filter((item: any)=>item.isCurrent)[0]; 
                 const value = response.data
+                console.log(response.data)
                 const data: any = {
                     ...value,
                     id: value.id,
@@ -246,7 +244,8 @@ export default function AddParcelFormWrapper(){
                     costDeliveryToBranch: value.parcelCost.costDeliveryToBranch,
                     costDeliveryToPoint: value.parcelCost.costDeliveryToPoint,
                     costPickingUp: value.parcelCost.costPickingUp,
-                    paymentMethods: paymentMethods && paymentMethods.filter((item)=>item.value === value.parcelCost.paymentMethodId)[0],
+                    paymentMethod: paymentMethods && paymentMethods.filter((item)=>item.value === value.parcelCost.paymentMethod.id),
+                    
                     senderCourierId: value.senderCourier?  {
                         label: value.senderCourier?.fullName + " " + value.senderCourier?.phoneNumber,
                         value: value.senderCourier?.id
@@ -270,6 +269,8 @@ export default function AddParcelFormWrapper(){
 
     const onSumbit = useCallback((value: any)=>{
         console.log(value)
+
+        //update
         if(parcelId !== ""){
             const custom_images : any = [];
             value.images.map((item: any)=>{
@@ -279,8 +280,15 @@ export default function AddParcelFormWrapper(){
                 }
                 custom_images.push(image_item)
             })
-
+            console.log(value)
+            let paymentMethodId:any = "";
+            if(initialValues.paymentMethods.value !== ""){
+                paymentMethodId = value.paymentMethods.value
+            }else {
+                paymentMethodId = 1;
+            }
             const data = {
+
                 // ...value,
                 id: value.id,
                 code: value.code,
@@ -292,7 +300,7 @@ export default function AddParcelFormWrapper(){
                     costDeliveryToPoint: Number(value.costDeliveryToPoint),
                     costDeliveryToBranch: Number(value.costDeliveryToBranch),
                     currencyId: 1,
-                    paymentMethodId: value.paymentMethods.value,
+                    paymentMethodId: paymentMethodId,
                 },
                 senderId: Number(value.senderId.value),
                 recipientId: Number(value.recipientId.value),
@@ -328,15 +336,16 @@ export default function AddParcelFormWrapper(){
         }else{
             // if(value.paymentMethod.value === ""){
             //     toast.warning("Выберите метод платежа!")
-            // }else {
+            // }
+            // else {
         
-            console.log(value)
+             console.log(value)
 
-            let paymentMetId:any = "";
+            let paymentMethodId:any = "";
             if(value.paymentMethods.value !== ""){
-                paymentMetId = value.paymentMethods.value
+                paymentMethodId = value.paymentMethods.value
             }else {
-                paymentMetId = null;
+                paymentMethodId = 1;
             }
 
             const data = {
@@ -350,7 +359,7 @@ export default function AddParcelFormWrapper(){
                     costDeliveryToPoint: Number(value.costDeliveryToPoint),
                     costDeliveryToBranch: Number(value.costDeliveryToBranch),
                     currencyId: 1,
-                    paymentMethodId: paymentMetId,
+                    paymentMethodId: paymentMethodId,
                 },
                 senderId: Number(value.senderId.value),
                 recipientId: Number(value.recipientId.value),
@@ -376,6 +385,7 @@ export default function AddParcelFormWrapper(){
                 sendSmsToSender: value.sendSmsToSender,
                 sendSmsToTelegram: value.sendSmsToTelegram,
             }  
+            console.log(data)
             request.post("/Parcel/Createparcel", data ,{
                     headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`}
                 }).then(()=>{
@@ -435,7 +445,7 @@ export default function AddParcelFormWrapper(){
          <AddParcelForm 
                 senders={senders}
                 recipients={receipents}
-                paymentMethods={paymentMethods} 
+                paymentMethod={paymentMethods} 
                 statuses={parcelStatuses}
                 customers={couriers} 
                 initialValues={initialValues} 
