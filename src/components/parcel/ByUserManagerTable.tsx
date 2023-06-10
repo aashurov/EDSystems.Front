@@ -1,18 +1,19 @@
 import React from "react";
 import TableButton from "../button/TableButton";
-import DeleteIcon from "../icons/DeleteIcon";
-import EditIcon from "../icons/EditIcon";
 import Table from "../table/Table";
-import EyeIcon from "../icons/EyeIcon";
+import ArrowUpIcon from "../icons/ArrowUpIcon";
+import ArrowDownIcon from "../icons/ArrowDownIcon";
 
 interface UserManagerTableProps{
     readonly data: any;
     readonly editRow: (value: any) => void;
     readonly byCourier: (value: any) => void;
+    readonly byCourierPickup: (value: any) => void;
+
     readonly deleteRow: (value: any) => void;
 }
 
-export default function UserManagerTable({data, editRow, byCourier, deleteRow}:UserManagerTableProps){
+export default function UserManagerTable({data, editRow, byCourier, byCourierPickup, deleteRow}:UserManagerTableProps){
 
     const headers:any = [
         {
@@ -73,7 +74,13 @@ export default function UserManagerTable({data, editRow, byCourier, deleteRow}:U
                                 className="bg-success me-3"
                                 onClick={()=>byCourier(row)}
                                 >
-                                <EyeIcon color="white" size={14}/>
+                                <ArrowUpIcon color="white" />
+                            </TableButton>
+                            <TableButton
+                                className="bg-success me-3"
+                                onClick={()=>byCourierPickup(row)}
+                                >
+                                <ArrowDownIcon color="white" />
                             </TableButton>
                             {/* <TableButton
                                 className="bg-warning me-3"

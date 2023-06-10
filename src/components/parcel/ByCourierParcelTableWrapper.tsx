@@ -25,6 +25,14 @@ export default function ByCourierParcelTableWrapper(){
         }
     },[couirerId, ParcelApi, setData])
 
+    useEffect(()=>{
+        if(Boolean(couirerId)){
+            ParcelApi.getAllParcelByCourierPickup({pageNumber: pageCount, pageSize: pageSize, courierId: Number(couirerId)})
+            .then((response: any)=>setData(response.data.items))
+            .catch((error: any)=>console.log(error))
+        }
+    },[couirerId, ParcelApi, setData])
+
     const onPrint = useCallback(()=>{
         const codes = [];
         for(let i = 0; i<ids.length; i++){
