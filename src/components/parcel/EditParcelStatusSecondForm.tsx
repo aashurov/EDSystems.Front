@@ -40,11 +40,12 @@ export default function EditParcelStatusSecondForm({
         {
           label: "Маршрутный лист",
           value: "getCourierList"
-        },
-        {
-          label: "Накладной/Маршрутный лист",
-          value: "getAll"
         }
+        // ,
+        // {
+        //   label: "Накладной/Маршрутный лист",
+        //   value: "getAll"
+        // }
       ]
 
     const onChangeStatusId = useCallback((value: any)=>{

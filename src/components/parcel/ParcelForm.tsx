@@ -47,7 +47,7 @@ interface AddParcelFormProps{
     readonly customers: any[];
     readonly branchs: any[];
     readonly costInfo: any[];
-    readonly paymentMethods: any[];
+    readonly paymentMethod: any[];
     readonly setRundomCode: (value: any) => void;
     readonly onSubmit: (value: any) => void;
     readonly searchSender: (value: string) => void;
@@ -63,7 +63,7 @@ export default function AddParcelForm({
     plans, 
     statuses, 
     customers, 
-    paymentMethods, 
+    paymentMethod, 
     setInitialValues,
     setRundomCode,
     onSubmit,
@@ -204,10 +204,6 @@ export default function AddParcelForm({
         )
     },[setInitialValues])
 
-
-
-
-
     const onChangeParcelPlanId = useCallback((value: any)=>{
 
         const found = costInfo[costInfo.findIndex(x =>(x.fromBranch === initialValues.parcelBranchFromId.label && x.toBranch === initialValues.parcelBranchToId.label && x.planName === value.label))];
@@ -315,7 +311,6 @@ export default function AddParcelForm({
             })
         )
     },[setInitialValues])
-
     
     const onChangeStateDeliveryToPoint = useCallback((value: any)=>{
         setInitialValues((prev: any)=>
@@ -325,7 +320,6 @@ export default function AddParcelForm({
         )
     },[setInitialValues])
  
- 
     const onChangeStateSenderCourierId = useCallback((value: any)=>{
         setInitialValues((prev: any)=>
             update(prev, {
@@ -333,7 +327,6 @@ export default function AddParcelForm({
             })
         )
     },[setInitialValues])
-
 
     const onChangeSendSmsToRecipient = useCallback((value: any)=>{
         setInitialValues((prev: any)=>
@@ -343,7 +336,6 @@ export default function AddParcelForm({
         )
     },[setInitialValues])
 
-
     const onChangeSendSmsToSender = useCallback((value: any)=>{
         setInitialValues((prev: any)=>
             update(prev, {
@@ -351,7 +343,6 @@ export default function AddParcelForm({
             })
         )
     },[setInitialValues])
-
 
     const onChangeSendSmsToTelegram = useCallback((value: any)=>{
         setInitialValues((prev: any)=>
@@ -371,7 +362,6 @@ export default function AddParcelForm({
         )
     },[setInitialValues])
 
-
     const onChangePickupAddress = useCallback((value: any)=>{
         setInitialValues((prev: any)=>
             update(prev, {
@@ -380,7 +370,6 @@ export default function AddParcelForm({
         )
     },[setInitialValues])
 
-    
     const onChangeDeliveryAddress = useCallback((value: any)=>{
         setInitialValues((prev: any)=>
             update(prev, {
@@ -592,7 +581,7 @@ export default function AddParcelForm({
                                     </div>
                                     <div className="col-6 mt-3">
                                         <SelectPickerField 
-                                            options={paymentMethods} 
+                                            options={paymentMethod} 
                                             onChanges={(value: any)=>onChangePaymentMethod(value)}
                                             name="paymentMethod" 
                                             label="Метод оплаты"/>

@@ -4,5 +4,10 @@ table{
         position: sticky;
         background-color: #fff;
         top: -8px;
+        th {
+            font-weight: bold!important;
+        }
+        
     }
+    
 }
