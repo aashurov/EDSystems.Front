@@ -21,7 +21,7 @@ export default function UserManagerTable({data, editRow, byCourier, byCourierPic
             access: 'id',
             width: 40
         },
-         {
+        {
             header: 'ФИО',
             access: 'fullName' ,
             width: 100
@@ -69,37 +69,37 @@ export default function UserManagerTable({data, editRow, byCourier, byCourierPic
             access: 'edit',
             ceil: (row: any)=>{
                 return (
-                            <div className="d-flex">
-                                <TableButton
-                                className="bg-success me-3"
-                                onClick={()=>byCourier(row)}
-                                >
-                                <ArrowUpIcon color="white" />
-                            </TableButton>
-                            <TableButton
-                                className="bg-success me-3"
-                                onClick={()=>byCourierPickup(row)}
-                                >
-                                <ArrowDownIcon color="white" />
-                            </TableButton>
-                            {/* <TableButton
+                    <div className="d-flex">
+                        <TableButton
+                            className="bg-success me-3"
+                            onClick={()=>byCourier(row)}
+                        >
+                            Доставки
+                        </TableButton>
+                        <TableButton
+                            className="bg-success me-3"
+                            onClick={()=>byCourierPickup(row)}
+                        >
+                            Заборы
+                        </TableButton>
+                        {/* <TableButton
                                 className="bg-warning me-3"
                                 onClick={()=>editRow(row)}
                                 >
                                 <EditIcon color="white" size={14}/>
                             </TableButton> */}
-                            {/* <TableButton
+                        {/* <TableButton
                                 className="bg-danger"
                                 onClick={()=>deleteRow(row)}
                                 >
                                 <DeleteIcon color="white" size={14}/>
                             </TableButton> */}
-                            </div>
-                        )
+                    </div>
+                )
             },
             width: 60,
         },
-        
+
     ]
     return (<Table data={data} headers={headers} withCheckbox={false}/>)
 }

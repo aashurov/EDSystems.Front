@@ -3,6 +3,7 @@ import TabPage from "../tabs/TabPage";
 import { useStatusApiContext } from "../../api/status/StatusApiContext";
 import { useUserApiContext } from "../../api/user/UserApiContext";
 import { request } from "../../api/request";
+import { toast } from "react-toastify";
 import EditParcelStatusSecondForm from "./EditParcelStatusSecondForm";
 
 const defaultValues = {
@@ -29,13 +30,13 @@ export default function EditParcelStatusSecondFormWrapper(){
 
     useEffect(()=>{
         StatusApi.getAllStatusWithoutPagination().then((response: any)=>{
-           response.data.statuses && response.data.statuses.map((status: any)=>{
-            const data = {
-                label: status.name,
-                value: status.id
-            }
-            setStatuses((status: any)=>[...status, data]);
-           })
+            response.data.statuses && response.data.statuses.map((status: any)=>{
+                const data = {
+                    label: status.name,
+                    value: status.id
+                }
+                setStatuses((status: any)=>[...status, data]);
+            })
         }).catch((error: any)=>console.log(error))
     },[StatusApi, setStatuses]);
 
@@ -52,49 +53,52 @@ export default function EditParcelStatusSecondFormWrapper(){
     },[UserApi, setCuriers])
 
     const sendStatus = useCallback((value: any)=>{
-        
+
         const array:any = [];
         value.parcelCode && value.parcelCode.map((code: any)=>{
             array.push(Number(code.title));
         })
 
-            // getInvoice: value.radioButtonValue === "getInvoice"? true : false, 
-            // getCourierList: value.radioButtonValue === "getCourierList"? true : false, 
-            // getAll: value.radioButtonValue === "getAll"? true : false
+        // getInvoice: value.radioButtonValue === "getInvoice"? true : false,
+        // getCourierList: value.radioButtonValue === "getCourierList"? true : false,
+        // getAll: value.radioButtonValue === "getAll"? true : false
 
-        
+
         if(value.radioButtonValue === "getInvoice"){
             const data = {
                 code: array,
             }
-            request.post(`/File/GetInvoices`, 
+            request.post(`/File/GetInvoices`,
                 data,
                 {
                     responseType: "blob"
                 }
-                ).then((response) => {
-                    const href = URL.createObjectURL(response.data);
-                    const link = document.createElement('a');
-                    link.href = href;
-                    link.setAttribute('download', `${value.code}.pdf`);
-                    document.body.appendChild(link);
-                    link.click();
-                
-                    document.body.removeChild(link);
-                    URL.revokeObjectURL(href);
+            ).then((response) => {
+                const href = URL.createObjectURL(response.data);
+                const link = document.createElement('a');
+                link.href = href;
+                link.setAttribute('download', `${value.code}.pdf`);
+                document.body.appendChild(link);
+                link.click();
+
+                document.body.removeChild(link);
+                URL.revokeObjectURL(href);
+                setInitialValues(defaultValues)
+            })
+                .catch((error: any)=> {
                     setInitialValues(defaultValues)
-                })
-                .catch((error: any)=>console.log(error))
+                    toast.error(error.message)}
+                ) /*console.log(error))*/
         }else if(value.radioButtonValue === "getCourierList"){
             const data = {
                 code: array,
                 id: "10"
             }
-            request.post(`/File/GetJobList`, 
-            data,
-            {
-                responseType: "blob"
-            }
+            request.post(`/File/GetJobList`,
+                data,
+                {
+                    responseType: "blob"
+                }
             ).then((response) => {
                 const href = URL.createObjectURL(response.data);
                 const link = document.createElement('a');
@@ -102,26 +106,29 @@ export default function EditParcelStatusSecondFormWrapper(){
                 link.setAttribute('download', `JobList.pdf`);
                 document.body.appendChild(link);
                 link.click();
-            
+
                 document.body.removeChild(link);
                 URL.revokeObjectURL(href);
                 setInitialValues(defaultValues)
             })
-            .catch((error: any)=>console.log(error))
+                .catch((error: any)=> {
+                    setInitialValues(defaultValues)
+                    toast.error(error.message)}
+                ) /*console.log(error))*/
         }
     },[request, setInitialValues, defaultValues])
 
     return (
         <TabPage
             childrenClassName="p-4"
-            >
+        >
             <EditParcelStatusSecondForm
                 initialValues={initialValues}
                 setInitialValues={setInitialValues}
                 statuses={statuses}
                 curiers={curiers}
                 onSubmit={(value)=>sendStatus(value)}
-                />
+            />
         </TabPage>
     )
 }
